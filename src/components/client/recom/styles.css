@@ -1,0 +1,21 @@
+.tableCovid {
+    padding: 20px;
+    box-shadow: 5px 10px 8px #d6d6d6;
+    margin: 0 auto;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: larger;
+    height: 180px;
+}
+.tableHead {
+    text-align: left;
+    margin-right: 100px;
+}
+.chartLinear {
+    padding: 20px;
+    box-shadow: 5px 10px 8px #d6d6d6;
+    margin: 0 auto;
+    border-radius: 20px;
+    align-self: "center";
+    align-items: "center";
+}
