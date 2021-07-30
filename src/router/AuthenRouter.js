@@ -4,11 +4,12 @@ import {useSelector}from "react-redux"
 
 const AuthenRouter = ({ component: Component, ...rest }) =>{
   const UserReducer = useSelector(state => state.UserReducer)
+  const userInStorage= localStorage.getItem("ADMIN")
   return (<Route
     {...rest}
     render={(props) => {
       console.log("user", UserReducer.data);
-      return !UserReducer.data ? <Redirect to="/login" /> : <Component {...props} />;
+      return !userInStorage ? <Redirect to="/login" /> : <Component {...props} />;
     }}
   />)
 } 

@@ -23,7 +23,7 @@ function Admin(props) {
         </Col>
         <Col span={6}>
           <div className="feature">
-            <p>Chat</p>
+            <p>Logout</p>
           </div>
         </Col>
       </Row>

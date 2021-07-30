@@ -1,0 +1,12 @@
+.editor{
+    padding: 20px 100px 20px 100px;
+    box-shadow: 5px 10px 8px #d6d6d6;
+    border-radius: 20px;
+    margin: 20px;
+}
+.uploadButton{
+    background-color: rgb(78, 161, 78);
+    margin: 20px 0px 20px 0px;
+    border-radius: 10px;
+    font-weight: bold;
+}

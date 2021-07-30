@@ -10,11 +10,15 @@ function Login(props) {
   const dispatch = useDispatch()
   const history=useHistory()
   const UserReducer = useSelector((state) => state.UserReducer);
-  const onFinish = async (values) => {
+  if (localStorage.getItem("ADMIN")) {
+    history.replace("/admin");
+  }
+  const onFinish = (values) => {
     console.log("Success:", values);
     dispatch(loginAction(values))
   };
   if (UserReducer.data) {
+    localStorage.setItem("ADMIN",UserReducer.data)
     history.replace("/admin");
   }
   const onFinishFailed = (errorInfo) => {
