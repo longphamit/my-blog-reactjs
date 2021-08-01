@@ -3,7 +3,7 @@ import Editor from "ckeditor5-custom-build/build/ckeditor";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import request from "../../../connect/AxiosConfig";
 import "./styles.css";
-import { Button, Input } from "antd";
+import { Button, Input, notification } from "antd";
 function Blog(props) {
   const [imageShow, setImageShow] = useState();
   const [blog, setBlog] = useState({
@@ -29,7 +29,16 @@ function Blog(props) {
         type: "application/json",
       })
     );
-    request.post("/blog", form);
+    const res=await request.post("/blog", form);
+    if(res.status==200){
+      notification["success"]({
+        message: 'System',
+        placement:"bottomRight",
+        style:{background:"#d2ffc7"},
+        description:
+          'Post a blog success!',
+      });
+    }
   };
   useEffect(() => {
     return () => {};

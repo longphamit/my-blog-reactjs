@@ -8,6 +8,12 @@ import "./styles.css";
 import request from "../../../connect/AxiosConfig";
 const columns = [
   {
+    title: 'Image Show',
+    dataIndex: 'imageShow',
+    key: 'imageShow',
+    render: text => <img style={{width:100,height:100}} src={text}/>
+  },
+  {
     title: 'Title',
     dataIndex: 'title',
     key: 'title',
@@ -41,17 +47,14 @@ const columns = [
     render: (text, record) => (
       <Space size="middle">
         <a>Update {record.name}</a>
-        <a style={{color:"red"}}>Delete</a>
+        <a style={{color:"red"}} onClick={()=>request.delete('/blog/'+record.id)}>Delete</a>
       </Space>
     ),
   },
 ];
 
 function Admin(props) {
-  const [collapsed, setCollapsed] = useState("");
   const [blogs,setBlogs]=useState([]);
-  const history = useHistory();
-  const dispatch = useDispatch();
   const fetchBlogs=async()=>{
     const res=await request.get("/blog");
     console.log(res.data)
