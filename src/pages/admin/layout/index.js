@@ -6,7 +6,7 @@ import { logoutAction } from "../../../redux/action/UserAction";
 import "./styles.css";
 
 import { Layout, Menu } from "antd";
-import { UploadOutlined, UserOutlined, VideoCameraOutlined,LogoutOutlined,HomeOutlined,FileImageOutlined } from '@ant-design/icons';
+import { UploadOutlined, UserOutlined,OrderedListOutlined,LogoutOutlined,HomeOutlined,FileImageOutlined } from '@ant-design/icons';
 import { Footer } from "antd/lib/layout/layout";
 
 
@@ -54,13 +54,16 @@ function LayoutAdmin(props) {
             <Menu.Item key="2" icon={<UserOutlined />}>
               Profile
             </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />} onClick={()=>{history.replace('/blog')}}>
+            <Menu.Item key="3" icon={<OrderedListOutlined />}>
+              Category
+            </Menu.Item>
+            <Menu.Item key="4" icon={<UploadOutlined />} onClick={()=>{history.replace('/blog')}}>
               Blog
             </Menu.Item>
-            <Menu.Item key="4" icon={<FileImageOutlined />} onClick={()=>{history.replace('/blog')}}>
+            <Menu.Item key="5" icon={<FileImageOutlined />} onClick={()=>{history.replace('/blog')}}>
               Memo
             </Menu.Item>
-            <Menu.Item key="5" icon={<LogoutOutlined />} onClick={()=>logout()}>
+            <Menu.Item key="6" icon={<LogoutOutlined />} onClick={()=>logout()}>
               Logout
             </Menu.Item>
           </Menu>

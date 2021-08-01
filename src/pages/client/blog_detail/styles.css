@@ -1,0 +1,29 @@
+
+:root {
+	--ck-image-style-spacing: 1.5em;
+	--ck-inline-image-style-spacing: calc(var(--ck-image-style-spacing) / 2);
+}
+
+.content{
+    margin:0 auto
+}
+.info{
+    flex-direction: row;
+    display: flex;
+    margin: 30px;
+    justify-content: center;
+    text-align: center;
+}
+.image_resized img {max-width:100%}
+.image-style-align-left {
+    float: left;
+    margin-right: var(--ck-image-style-spacing);
+}
+.image-style-align-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+.image-style-align-right {
+    float: right;
+    margin-left: var(--ck-image-style-spacing);
+}

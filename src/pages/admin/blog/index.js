@@ -12,31 +12,33 @@ function Blog(props) {
     author: "Long Phạm",
     categoryId: 1,
   });
-  const onChooseImage=(e)=>{
+  const onChooseImage = (e) => {
     const image = e.target.files[0];
     // setImages([...images, image]);
     // const urlImage = URL.createObjectURL(e.target.files[0]);
     setImageShow(image);
-  }
-
+  };
+  const fetchCategory = async () => {
+    const res = await request.get("/category");
+    console.log(res.data);
+  };
   const onSubmitBlog = async () => {
     let form = new FormData();
     form.append("imageShow", imageShow);
-    
+
     form.append(
       "blog",
       new Blob([JSON.stringify(blog)], {
         type: "application/json",
       })
     );
-    const res=await request.post("/blog", form);
-    if(res.status==200){
+    const res = await request.post("/blog", form);
+    if (res.status == 200) {
       notification["success"]({
-        message: 'System',
-        placement:"bottomRight",
-        style:{background:"#d2ffc7"},
-        description:
-          'Post a blog success!',
+        message: "System",
+        placement: "bottomRight",
+        style: { background: "#d2ffc7" },
+        description: "Post a blog success!",
       });
     }
   };
@@ -57,7 +59,7 @@ function Blog(props) {
         </div>
         <div className="editPart">
           <h3 style={{ color: "#f56042", fontWeight: "bold" }}>Show Image</h3>
-          <input type="file" onChange={e=>onChooseImage(e)} />
+          <input type="file" onChange={(e) => onChooseImage(e)} />
         </div>
         <div className="editPart">
           <h3 style={{ color: "#f56042", fontWeight: "bold" }}>Content</h3>
@@ -66,49 +68,33 @@ function Blog(props) {
             config={{
               ckfinder: {
                 // Upload the images to the server using the CKFinder QuickUpload command.
-                uploadUrl: "http://localhost:8080/api/blog/images",
+                uploadUrl: "http://localhost:8080/api/blog/editor",
               },
-              toolbar: [
-                "heading",
-                "|",
-                "fontfamily",
-                "fontsize",
-                "|",
-                "alignment",
-                "|",
-                "fontColor",
-                "fontBackgroundColor",
-                "|",
-                "bold",
-                "italic",
-                "strikethrough",
-                "underline",
-                "subscript",
-                "superscript",
-                "|",
-                "link",
-                "|",
-                "outdent",
-                "indent",
-                "|",
-                "bulletedList",
-                "numberedList",
-                "todoList",
-                "|",
-                "code",
-                "codeBlock",
-                "|",
-                "insertTable",
-                "|",
-                "uploadImage",
-                "blockQuote",
-                "|",
-                "undo",
-                "redo",
-              ],
+              image: {
+                // You need to configure the image toolbar, too, so it uses the new style buttons.
+                toolbar: [
+                  "imageTextAlternative",
+                  "|",
+                  "imageStyle:alignRight",
+                  "imageStyle:full",
+                  "imageStyle:alignLeft",
+                ],
+
+                styles: [
+                  // This option is equal to a situation where no style is applied.
+                  "alignRight",
+
+                  // This represents an image aligned to the left.
+                  "full",
+
+                  // This represents an image aligned to the right.
+                  "alignLeft",
+                ],
+              },
+              allowedContent: true,
             }}
             data=""
-            onReady={(editor) => {  
+            onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
               console.log("Editor is ready to use!", editor);
             }}

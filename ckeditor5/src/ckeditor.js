@@ -46,7 +46,8 @@ import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
-
+import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting';
+import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles';
 class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
@@ -93,7 +94,61 @@ Editor.builtinPlugins = [
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	TodoList
+	TodoList,
+	ImageResizeEditing,
+	ImageResizeHandles
 ];
+Editor.defaultConfig={
+	toolbar: [
+		"heading",
+		"|",
+		"fontfamily",
+		"fontsize",
+		"|",
+		"alignment",
+		"|",
+		"fontColor",
+		"fontBackgroundColor",
+		"|",
+		"bold",
+		"italic",
+		"strikethrough",
+		"underline",
+		"subscript",
+		"superscript",
+		"|",
+		"link",
+		"|",
+		"outdent",
+		"indent",
+		"|",
+		"bulletedList",
+		"numberedList",
+		"todoList",
+		"|",
+		"code",
+		"codeBlock",
+		"|",
+		"insertTable",
+		"|",
+		"uploadImage",
+		"blockQuote",
+		"|",
+		"undo",
+		"redo",
+		"resizeImage",
+	  ],
+	  image: {
+		toolbar: [
+            'imageStyle:inline',
+            'imageStyle:block',
+            'imageStyle:side',
+            '|',
+            'toggleImageCaption',
+            'imageTextAlternative'
+        ]
+	  },
+	  language: 'en'
+}
 
 export default Editor;

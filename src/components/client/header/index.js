@@ -8,18 +8,35 @@ import {
   UserOutlined
 } from "@ant-design/icons";
 import "./styles.css";
+import { useHistory } from "react-router";
 const Header = (props) => {
-  const [state, setState] = useState("");
-
+  const [chooseHome, setChooseHome] = useState(true);
+  const [chooseMemo, setChooseMemo] = useState(false);
+  const [chooseProject, setChooseProject] = useState(false);
+  const [chooseContact, setChooseContact] = useState(false);
+  const [chooseChat, setChooseChat] = useState(false);
+  const [chooseProfile, setChooseProfile] = useState(false);
+  const history=useHistory();
   useEffect(() => {
     return () => {};
   }, []);
-
+  const redirectPage=(page)=>{
+    setChoose()
+    history.push(page)
+  }
+  const setChoose=()=>{
+    setChooseHome(false)
+    setChooseMemo(false)
+    setChooseProject(false)
+    setChooseChat(false)
+    setChooseProfile(false)
+    setChooseContact(false)
+  }
   return (
     <>
       <Row>
         <Col span={4}>
-          <div className="colChild">
+          <div className="colChild"  onClick={()=>{redirectPage("/home");setChooseHome(true)}}>
             <img src="/home.png" style={{width:40,height:40}}/>
             <p className="titleHeader">Home</p>
           </div>
@@ -37,7 +54,7 @@ const Header = (props) => {
           </div>
         </Col>
         <Col span={4}>
-          <div className="colChild">
+          <div className="colChild" onClick={()=>{redirectPage("/contact")}}>
           <img src="/contact.png" style={{width:40,height:40}}/>
             <p className="titleHeader">Contact</p>
           </div>
