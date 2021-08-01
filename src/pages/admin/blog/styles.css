@@ -5,8 +5,12 @@
     margin: 20px;
 }
 .uploadButton{
-    background-color: rgb(78, 161, 78);
+    background-color: #f56042;
     margin: 20px 0px 20px 0px;
     border-radius: 10px;
-    font-weight: bold;
+    font-weight: bold ;
+    color: #fff;
+}
+.editPart{
+    margin-top: 30px;
 }

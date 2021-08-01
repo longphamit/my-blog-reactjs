@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, Route } from "react-router";
-import {useSelector}from "react-redux"
+import { Redirect, Route, withRouter } from "react-router";
+import { useSelector } from "react-redux";
+import { Switch } from "react-router-dom";
 
-const AuthenRouter = ({ component: Component, ...rest }) =>{
-  const UserReducer = useSelector(state => state.UserReducer)
-  const userInStorage= localStorage.getItem("ADMIN")
-  return (<Route
-    {...rest}
-    render={(props) => {
-      console.log("user", UserReducer.data);
-      return !userInStorage ? <Redirect to="/login" /> : <Component {...props} />;
-    }}
-  />)
-} 
+const AuthenRouter = ({ component: Component, ...rest }) => {
+  const [isAuthen,setIsAuthen]=useState(false)
+  const UserReducer = useSelector((state) => state.UserReducer);
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        const userInStorage = localStorage.getItem("ADMIN");
+        return !userInStorage&&!UserReducer.data ? (
+          <Redirect to="/login" />
+        ) : (
+          <Component {...props} />
+        );
+      }}
+    />
+  );
+};
 
-export default AuthenRouter;
+export default withRouter(AuthenRouter);

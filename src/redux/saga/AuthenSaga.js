@@ -9,6 +9,8 @@ function* fetchUser(action) {
       email: action.payload.email,
       password: action.payload.password,
     });
+    yield console.log(res.headers)
+    yield localStorage.setItem("TOKEN",res.headers["X-LONGPC-ACCESS-TOKEN".toLowerCase()])
     yield put({ type: "LOGIN_SUCCESS", payload: res });
   } catch (e) {
     console.log(e);

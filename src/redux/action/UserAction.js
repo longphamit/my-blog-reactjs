@@ -5,3 +5,6 @@ export const loginAction = (values) => ({
     password: values.password,
   },
 });
+export const logoutAction = () => ({
+  type: 'LOGOUT',
+});

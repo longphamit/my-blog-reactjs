@@ -1,11 +1,36 @@
 import React, { useState, useEffect } from "react";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import "./styles.css"
-import { Button } from "antd";
+import request from "../../../connect/AxiosConfig";
+import "./styles.css";
+import { Button, Input } from "antd";
 function Blog(props) {
-  const [state, setState] = useState("");
+  const [imageShow, setImageShow] = useState();
+  const [blog, setBlog] = useState({
+    title: "",
+    content: "",
+    author: "Long Phạm",
+    categoryId: 1,
+  });
+  const onChooseImage=(e)=>{
+    const image = e.target.files[0];
+    // setImages([...images, image]);
+    // const urlImage = URL.createObjectURL(e.target.files[0]);
+    setImageShow(image);
+  }
 
+  const onSubmitBlog = async () => {
+    let form = new FormData();
+    form.append("imageShow", imageShow);
+    
+    form.append(
+      "blog",
+      new Blob([JSON.stringify(blog)], {
+        type: "application/json",
+      })
+    );
+    request.post("/blog", form);
+  };
   useEffect(() => {
     return () => {};
   }, []);
@@ -13,70 +38,88 @@ function Blog(props) {
   return (
     <>
       <div className="editor">
-        <CKEditor
-          editor={Editor}
-          config={{
-            ckfinder: {
-              // Upload the images to the server using the CKFinder QuickUpload command.
-              uploadUrl: "http://localhost:8181/api/product/ckfinder",
-            },
-            toolbar: [
-              "heading",
-              "|",
-              "fontfamily",
-              "fontsize",
-              "|",
-              "alignment",
-              "|",
-              "fontColor",
-              "fontBackgroundColor",
-              "|",
-              "bold",
-              "italic",
-              "strikethrough",
-              "underline",
-              "subscript",
-              "superscript",
-              "|",
-              "link",
-              "|",
-              "outdent",
-              "indent",
-              "|",
-              "bulletedList",
-              "numberedList",
-              "todoList",
-              "|",
-              "code",
-              "codeBlock",
-              "|",
-              "insertTable",
-              "|",
-              "uploadImage",
-              "blockQuote",
-              "|",
-              "undo",
-              "redo",
-            ],
-          }}
-          data=""
-          onReady={(editor) => {
-            // You can store the "editor" and use when it is needed.
-            console.log("Editor is ready to use!", editor);
-          }}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            console.log(data);
-            //setFormCreate({...formCreate,description:data})
-          }}
-          onBlur={(event, editor) => {
-            console.log("Blur.", editor);
-          }}
-          onFocus={(event, editor) => {
-            console.log("Focus.", editor);
-          }}
-        />
-        <Button type="primary" className="uploadButton">Upload</Button>
+        <div>
+          <h3 style={{ color: "#f56042", fontWeight: "bold" }}>Title</h3>
+          <Input
+            onChange={(e) => {
+              setBlog({ ...blog, title: e.target.value });
+            }}
+          />
+        </div>
+        <div className="editPart">
+          <h3 style={{ color: "#f56042", fontWeight: "bold" }}>Show Image</h3>
+          <input type="file" onChange={e=>onChooseImage(e)} />
+        </div>
+        <div className="editPart">
+          <h3 style={{ color: "#f56042", fontWeight: "bold" }}>Content</h3>
+          <CKEditor
+            editor={Editor}
+            config={{
+              ckfinder: {
+                // Upload the images to the server using the CKFinder QuickUpload command.
+                uploadUrl: "http://localhost:8080/api/blog/images",
+              },
+              toolbar: [
+                "heading",
+                "|",
+                "fontfamily",
+                "fontsize",
+                "|",
+                "alignment",
+                "|",
+                "fontColor",
+                "fontBackgroundColor",
+                "|",
+                "bold",
+                "italic",
+                "strikethrough",
+                "underline",
+                "subscript",
+                "superscript",
+                "|",
+                "link",
+                "|",
+                "outdent",
+                "indent",
+                "|",
+                "bulletedList",
+                "numberedList",
+                "todoList",
+                "|",
+                "code",
+                "codeBlock",
+                "|",
+                "insertTable",
+                "|",
+                "uploadImage",
+                "blockQuote",
+                "|",
+                "undo",
+                "redo",
+              ],
+            }}
+            data=""
+            onReady={(editor) => {  
+              // You can store the "editor" and use when it is needed.
+              console.log("Editor is ready to use!", editor);
+            }}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              console.log(data);
+              setBlog({ ...blog, content: data });
+            }}
+            onBlur={(event, editor) => {
+              console.log("Blur.", editor);
+            }}
+            onFocus={(event, editor) => {
+              console.log("Focus.", editor);
+            }}
+          />
+        </div>
+
+        <Button className="uploadButton" onClick={() => onSubmitBlog()}>
+          Upload
+        </Button>
       </div>
     </>
   );

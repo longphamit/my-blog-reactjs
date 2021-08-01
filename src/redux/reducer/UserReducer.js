@@ -1,5 +1,5 @@
 const initState={
-    data:null
+    data:null,
 }
 const UserReducer=(state=initState,action)=>{
     const {type,payload}=action;
@@ -13,6 +13,12 @@ const UserReducer=(state=initState,action)=>{
             return {
                 ...state,
                 data:payload
+            }
+        }
+        case "LOGOUT":{
+            return {
+                ...state,
+                data:null
             }
         }
         default:{

@@ -6,15 +6,16 @@ import Blog from './pages/admin/blog';
 import Admin from './pages/admin/home';
 import AuthenRouter from './router/AuthenRouter';
 import Login from './pages/admin/login';
+import LayoutAdmin from './pages/admin/layout';
 
 function App() {
   return (
     <Router>
     <Switch>
       <Route path="/home" exact={true} component={Home}></Route>
-      <Route path="/blog" exact={true} component={Blog}></Route>
       <Route path="/login" exact={true} component={Login}></Route>
-      <AuthenRouter path="/admin" exact={true} component={Admin}></AuthenRouter>
+      <AuthenRouter path="/admin" exact={true} component={()=><LayoutAdmin page="ADMIN"/>}/>
+      <AuthenRouter path="/blog" exact={true} component={()=><LayoutAdmin page="BLOG"/>}/> 
     </Switch>
   </Router>
   );
