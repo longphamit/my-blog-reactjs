@@ -47,7 +47,7 @@ const columns = [
     render: (text, record) => (
       <Space size="middle">
         <a>Update {record.name}</a>
-        <a style={{color:"red"}} onClick={()=>request.delete('/blog/'+record.id)}>Delete</a>
+        <a style={{color:"red"}} onClick={()=>request.delete('/blog/auth/'+record.id)}>Delete</a>
       </Space>
     ),
   },

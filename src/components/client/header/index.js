@@ -36,13 +36,13 @@ const Header = (props) => {
     <>
       <Row>
         <Col span={4}>
-          <div className="colChild"  onClick={()=>{redirectPage("/home");setChooseHome(true)}}>
+          <div className="colChild"  onClick={()=>{redirectPage("/");setChooseHome(true)}}>
             <img src="/home.png" style={{width:40,height:40}}/>
             <p className="titleHeader">Home</p>
           </div>
         </Col>
         <Col span={4}>
-          <div className="colChild">
+          <div className="colChild" onClick={()=>{redirectPage("/memo")}}>
           <img src="/memo.png" style={{width:40,height:40}}/>
             <p className="titleHeader">Memo</p>
           </div>

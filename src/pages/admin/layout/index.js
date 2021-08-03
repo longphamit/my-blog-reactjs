@@ -12,6 +12,8 @@ import { Footer } from "antd/lib/layout/layout";
 
 import Admin from "../home/index"
 import Blog from "../blog";
+import MemoAdd from "../memo_add";
+import MemoAdmin from "../memo";
 const { Header, Sider, Content } = Layout;
 
 function LayoutAdmin(props) {
@@ -60,7 +62,7 @@ function LayoutAdmin(props) {
             <Menu.Item key="4" icon={<UploadOutlined />} onClick={()=>{history.replace('/blog')}}>
               Blog
             </Menu.Item>
-            <Menu.Item key="5" icon={<FileImageOutlined />} onClick={()=>{history.replace('/blog')}}>
+            <Menu.Item key="5" icon={<FileImageOutlined />} onClick={()=>{history.replace('/admin/memo')}}>
               Memo
             </Menu.Item>
             <Menu.Item key="6" icon={<LogoutOutlined />} onClick={()=>logout()}>
@@ -81,7 +83,9 @@ function LayoutAdmin(props) {
              {
                  props?
                  props.page==="ADMIN"?<Admin/>:
-                 props.page==="BLOG"?<Blog/>:null:null
+                 props.page==="BLOG"?<Blog/>:
+                 props.page==="MEMO_ADD"?<MemoAdd/>:
+                 props.page==="MEMO"?<MemoAdmin/>: <Admin/>:<Admin/>
              }
             </div>
           </Content>

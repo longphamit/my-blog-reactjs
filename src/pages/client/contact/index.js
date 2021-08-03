@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Button, Checkbox, Col, Input, Row,Form } from "antd";
+import { Button, Checkbox, Col, Input, Row,Form, notification } from "antd";
 
 
 import Header from "../../../components/client/header";
 import { SendOutlined } from "@ant-design/icons";
 import "./styles.css"
+import request from "../../../connect/AxiosConfig";
 function Contact(props) {
   const [state, setState] = useState("");
 
   useEffect(() => {
     return () => {};
   }, []);
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Success:", values);
+    const res =await request.post("/contact",values)
+    if (res.status == 200) {
+      notification["success"]({
+        message: "System",
+        placement: "bottomRight",
+        style: { background: "#d2ffc7" },
+        description: "Send contact success!",
+      });
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -53,7 +63,7 @@ function Contact(props) {
 
             <Form.Item
               label="Content"
-              name="Content"
+              name="content"
               rules={[
                 {
                   required: true,

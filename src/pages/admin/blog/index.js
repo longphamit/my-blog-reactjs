@@ -32,7 +32,7 @@ function Blog(props) {
         type: "application/json",
       })
     );
-    const res = await request.post("/blog", form);
+    const res = await request.post("/blog/auth", form);
     if (res.status == 200) {
       notification["success"]({
         message: "System",
@@ -68,7 +68,7 @@ function Blog(props) {
             config={{
               ckfinder: {
                 // Upload the images to the server using the CKFinder QuickUpload command.
-                uploadUrl: "http://localhost:8080/api/blog/editor",
+                uploadUrl: "http://localhost:8080/api/blog/auth/editor",
               },
               image: {
                 // You need to configure the image toolbar, too, so it uses the new style buttons.
