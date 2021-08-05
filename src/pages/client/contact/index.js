@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, Checkbox, Col, Input, Row,Form, notification } from "antd";
-
+import { Button, Checkbox, Col, Input, Row, Form, notification } from "antd";
 
 import Header from "../../../components/client/header";
 import { SendOutlined } from "@ant-design/icons";
-import "./styles.css"
+import "./styles.css";
 import request from "../../../connect/AxiosConfig";
 function Contact(props) {
   const [state, setState] = useState("");
@@ -14,7 +13,7 @@ function Contact(props) {
   }, []);
   const onFinish = async (values) => {
     console.log("Success:", values);
-    const res =await request.post("/contact",values)
+    const res = await request.post("/contact", values);
     if (res.status == 200) {
       notification["success"]({
         message: "System",
@@ -32,7 +31,7 @@ function Contact(props) {
     <>
       <Header />
       <Row>
-        <Col  span={6}></Col>
+        <Col span={6}></Col>
         <Col className="form" span={12}>
           <Form
             name="basic"
@@ -54,7 +53,8 @@ function Contact(props) {
               rules={[
                 {
                   required: true,
-                  message: "Please input your email!",
+                  type:"email",
+                  message: "Please input email!",
                 },
               ]}
             >
@@ -73,18 +73,6 @@ function Contact(props) {
             >
               <Input.TextArea />
             </Form.Item>
-
-            <Form.Item
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{
-                offset: 6,
-                span: 12,
-              }}
-            >
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
             <Form.Item
               wrapperCol={{
                 offset: 6,
@@ -92,7 +80,7 @@ function Contact(props) {
               }}
             >
               <Button
-              htmlType="submit"
+                htmlType="submit"
                 style={{
                   marginTop: 20,
                   color: "#ffff",
@@ -106,7 +94,7 @@ function Contact(props) {
             </Form.Item>
           </Form>
         </Col>
-        <Col  span={6}></Col>
+        <Col span={6}></Col>
       </Row>
     </>
   );

@@ -24,6 +24,8 @@ function App() {
       <AuthenRouter path="/blog" exact={true} component={()=><LayoutAdmin page="BLOG"/>}/> 
       <AuthenRouter path="/admin/memo-add" exact={true} component={()=><LayoutAdmin page="MEMO_ADD"/>}/>
       <AuthenRouter path="/admin/memo" exact={true} component={()=><LayoutAdmin page="MEMO"/>}/>
+      <AuthenRouter path="/admin/contact" exact={true} component={()=><LayoutAdmin page="CONTACT"/>}/>
+      <AuthenRouter path="/admin/category" exact={true} component={()=><LayoutAdmin page="CATEGORY"/>}/>
     </Switch>
   </Router>
   );

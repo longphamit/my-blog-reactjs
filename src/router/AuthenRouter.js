@@ -11,6 +11,7 @@ const AuthenRouter = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) => {
         const userInStorage = localStorage.getItem("ADMIN");
+        console.log(userInStorage)
         return !userInStorage&&!UserReducer.data ? (
           <Redirect to="/login" />
         ) : (

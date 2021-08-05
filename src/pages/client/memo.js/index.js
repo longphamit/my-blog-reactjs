@@ -39,26 +39,13 @@ function Memo(props) {
                         
                       >
                         <Meta
+                          description={item.content}
+                        />
+                         <Meta
                           title={item.year}
-                          description={item.detail}
                         />
                       </Card>
-                      <Row style={{ marginTop: 10 }}>
-                        <Col span={12}>
-                          <HeartOutlined
-                            style={{ fontSize: 30, color: "#f56747" }}
-                          />
-                        </Col>
-                        <Col span={12}>
-                          <SendOutlined
-                            style={{
-                              fontSize: 30,
-                              justifyContent: "flex-end",
-                              color: "#2f7dc2",
-                            }}
-                          />
-                        </Col>
-                      </Row>
+                      
                     </div>
                   </Col>
                         )

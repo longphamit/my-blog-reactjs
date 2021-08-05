@@ -5,7 +5,7 @@ import "./styles.css";
 import request from "../../../connect/AxiosConfig";
 function MemoAdd(props) {
   const [memo, setMemo] = useState({
-    detail: "",
+    content: "",
     year: "",
   });
   const [image, setImage] = useState("");
@@ -47,8 +47,8 @@ function MemoAdd(props) {
         wrapperCol={{ span: 16 }}
 
       >
-        <Form.Item label="Detail">
-          <Input.TextArea onChange={(item)=>setMemo({...memo,detail:item.target.value})} />
+        <Form.Item label="Content">
+          <Input.TextArea onChange={(item)=>setMemo({...memo,content:item.target.value})} />
         </Form.Item>
         <Form.Item label="Year">
             <DatePicker picker="year" onChange={(item)=>item.year?setMemo({...memo,year:item.year()}):null} />;

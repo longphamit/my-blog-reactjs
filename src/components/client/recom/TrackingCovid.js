@@ -8,15 +8,7 @@ function TrackingCovid(props) {
   const [state, setState] = useState("");
   const [dataNewest, setDataNewest] = useState("");
   const [dataLineChart, setDataLineChart] = useState("");
-  const fetchData = async () => {
-    const dataFromRequest = await request.get(
-      "https://api.covid19api.com/total/country/vn"
-    );
-    const dataArray = dataFromRequest.data;
-    console.log(dataArray)
-    console.log(dataArray[dataArray.length - 1]);
-    setDataNewest(dataArray[dataArray.length - 1]);
-  };
+
   const convertDate=(today)=>{
     return new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(today)
   }
@@ -37,9 +29,9 @@ function TrackingCovid(props) {
       arrayData.push({"Date":convertDate(new Date(item.Date)),"Deaths":item.Deaths,"Confirmed":item.Confirmed,"Recovered":item.Recovered,"Active":item.Active})
     })
     setDataLineChart(arrayData)
+    setDataNewest(arrayData[arrayData.length - 1]);
   }
   useEffect(() => {
-    fetchData();
     fetchDataToLinearChart();
   }, []);
 
@@ -93,7 +85,7 @@ function TrackingCovid(props) {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Line type="monotone" dataKey="Confirmed" stroke="#5195f5" />
+                  <Line type="monotone" dataKey="Confirmed" stroke="#5195f5"  />
                   <Line type="monotone" dataKey="Active" stroke="#fcba03" />
                   <Line type="monotone" dataKey="Recovered" stroke="#82ca9d" />
                 </LineChart>

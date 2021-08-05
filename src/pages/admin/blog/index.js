@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  } from "react";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import request from "../../../connect/AxiosConfig";
 import "./styles.css";
-import { Button, Input, notification } from "antd";
+import { Button, Input, notification,Select } from "antd";
+const { Option } = Select;
 function Blog(props) {
   const [imageShow, setImageShow] = useState();
+  const [category,setCategory]=useState();
   const [blog, setBlog] = useState({
     title: "",
     content: "",
     author: "Long Phạm",
-    categoryId: 1,
+    categoryId: "",
   });
   const onChooseImage = (e) => {
     const image = e.target.files[0];
@@ -21,8 +23,19 @@ function Blog(props) {
   const fetchCategory = async () => {
     const res = await request.get("/category");
     console.log(res.data);
+    setCategory(res.data)
   };
   const onSubmitBlog = async () => {
+    if(!blog.category){
+      notification["warning"]({
+        message: "System",
+        placement: "bottomRight",
+        style: { background: "#ffe88c" },
+        description: "Please Choose Category!",
+      });
+        return
+    }
+
     let form = new FormData();
     form.append("imageShow", imageShow);
 
@@ -43,6 +56,7 @@ function Blog(props) {
     }
   };
   useEffect(() => {
+    fetchCategory();
     return () => {};
   }, []);
 
@@ -56,6 +70,20 @@ function Blog(props) {
               setBlog({ ...blog, title: e.target.value });
             }}
           />
+        </div>
+        <div className="editPart">
+        <h3 style={{ color: "#f56042", fontWeight: "bold" }}>category</h3>
+          <Select
+            defaultValue="NONE"
+            style={{ width: 120 }}
+            onChange={(e)=>setBlog({ ...blog, category: e })}
+          >
+            {
+              category?.map((item)=>{
+                return (<Option value={item.id}>{item.name}</Option>)
+              })
+            }
+          </Select>
         </div>
         <div className="editPart">
           <h3 style={{ color: "#f56042", fontWeight: "bold" }}>Show Image</h3>

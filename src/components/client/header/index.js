@@ -1,4 +1,4 @@
-import { Avatar, Col, Row } from "antd";
+import { Avatar, Col, notification, Row } from "antd";
 import React, { useState, useEffect } from "react";
 import {
   HomeOutlined,
@@ -32,6 +32,14 @@ const Header = (props) => {
     setChooseProfile(false)
     setChooseContact(false)
   }
+  const notiProcessing=()=>{
+    notification["warning"]({
+      message: "System",
+      placement: "bottomRight",
+      style: { background: "#ffe88c" },
+      description: "This Item is being built",
+    });
+  }
   return (
     <>
       <Row>
@@ -48,7 +56,7 @@ const Header = (props) => {
           </div>
         </Col>
         <Col span={4}>
-          <div className="colChild">
+          <div className="colChild" onClick={notiProcessing}>
           <img src="/project.png" style={{width:40,height:40}}/>
             <p className="titleHeader">Project</p>
           </div>
@@ -60,14 +68,14 @@ const Header = (props) => {
           </div>
         </Col>
         <Col span={4}>
-          <div className="colChild">
+          <div className="colChild"  onClick={notiProcessing}>
           <img src="/chat.png" style={{width:40,height:40}}/>
             <p className="titleHeader">Chat with my bot</p>
           </div>
         </Col>
         
         <Col span={4}>
-          <div className="colAvatar">
+          <div className="colAvatar"  onClick={notiProcessing}>
           <Avatar size={80} src="https://avatars.githubusercontent.com/u/77977221?s=400&u=e4a797cb6e88b4e5e5c909d43b70aa30b6f92a5d&v=4" />
             <p className="titleHeader"> About me</p>
             
