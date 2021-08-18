@@ -10,7 +10,7 @@ function MemoAdd(props) {
   });
   const [image, setImage] = useState("");
   const onFinish = async () => {
-
+    if(memo.content)
     console.log(memo)
     let form = new FormData();
     form.append("image", image);

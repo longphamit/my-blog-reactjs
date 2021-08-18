@@ -2,9 +2,9 @@ import { Button, notification, Space, Table, Tag } from "antd";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
+import { deleteItemFromArray } from "../../../util/DeleteItem";
 
 function MemoAdmin(props) {
-  const [state, setState] = useState("");
   const [memos, setMemos] = useState([]);
   const history = useHistory();
   const fetchMemo = async () => {
@@ -12,22 +12,6 @@ function MemoAdmin(props) {
     setMemos(res.data);
   };
 
-  const deleteItem = (id) => {
-    let index = -1;
-    let i = 0;
-    let tempMemos = memos;
-    for (let item in tempMemos) {
-      if (item.id == id) {
-        index = i;
-      }
-      i++;
-    }
-    if (i > 0) {
-      console.log("true");
-      tempMemos.splice(i, 1);
-      setMemos(tempMemos);
-    }
-  };
   const deleteMemo = async (record) => {
     const res = await request.delete("memo/auth/" + record.id);
     if (res.status == 200) {
@@ -35,10 +19,11 @@ function MemoAdmin(props) {
         message: "System",
         placement: "bottomRight",
         style: { background: "#d2ffc7" },
-        description: "Add a category success!",
+        description: "Delete a memo success!",
       });
+      let newValue = deleteItemFromArray(record.id, memos);
+      setMemos([...newValue]);
     }
-    deleteItem(record.id);
   };
   const columns = [
     {
@@ -51,6 +36,12 @@ function MemoAdmin(props) {
       title: "Content",
       dataIndex: "content",
       key: "content",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Year",
+      dataIndex: "year",
+      key: "year",
       render: (text) => <a>{text}</a>,
     },
     {
@@ -70,7 +61,7 @@ function MemoAdmin(props) {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a>Update {record.name}</a>
+          <a>Update </a>
           <a style={{ color: "red" }} onClick={() => deleteMemo(record)}>
             Delete
           </a>
@@ -86,7 +77,7 @@ function MemoAdmin(props) {
   return (
     <>
       <Button onClick={() => history.push("/admin/memo-add")}>Add Memo</Button>
-      <Table columns={columns} dataSource={memos} />
+      {memos ? <Table columns={columns} dataSource={memos} /> : null}
     </>
   );
 }

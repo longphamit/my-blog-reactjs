@@ -16,6 +16,7 @@ import MemoAdd from "../memo_add";
 import MemoAdmin from "../memo";
 import ContactAdmin from "../contact";
 import CategoryAdmin from "../category";
+import BlogUpdate from "../blog_update";
 const { Header, Sider, Content } = Layout;
 
 function LayoutAdmin(props) {
@@ -89,6 +90,7 @@ function LayoutAdmin(props) {
                  props?
                  props.page==="ADMIN"?<Admin/>:
                  props.page==="BLOG"?<Blog/>:
+                 props.page==="BLOG_UPDATE"?<BlogUpdate/>:
                  props.page==="MEMO_ADD"?<MemoAdd/>:
                  props.page==="MEMO"?<MemoAdmin/>:
                  props.page==="CONTACT"?<ContactAdmin/>:

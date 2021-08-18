@@ -26,7 +26,7 @@ function Blog(props) {
     setCategory(res.data)
   };
   const onSubmitBlog = async () => {
-    if(!blog.category){
+    if(!blog.categoryId){
       notification["warning"]({
         message: "System",
         placement: "bottomRight",
@@ -76,7 +76,7 @@ function Blog(props) {
           <Select
             defaultValue="NONE"
             style={{ width: 120 }}
-            onChange={(e)=>setBlog({ ...blog, category: e })}
+            onChange={(e)=>setBlog({ ...blog, categoryId: e })}
           >
             {
               category?.map((item)=>{

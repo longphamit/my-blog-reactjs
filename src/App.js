@@ -22,6 +22,7 @@ function App() {
       <Route path="/memo" exact={true} component={Memo}></Route>
       <AuthenRouter path="/admin" exact={true} component={()=><LayoutAdmin page="ADMIN"/>}/>
       <AuthenRouter path="/blog" exact={true} component={()=><LayoutAdmin page="BLOG"/>}/> 
+      <AuthenRouter path="/blog/update" exact={true} component={()=><LayoutAdmin page="BLOG_UPDATE"/>}/> 
       <AuthenRouter path="/admin/memo-add" exact={true} component={()=><LayoutAdmin page="MEMO_ADD"/>}/>
       <AuthenRouter path="/admin/memo" exact={true} component={()=><LayoutAdmin page="MEMO"/>}/>
       <AuthenRouter path="/admin/contact" exact={true} component={()=><LayoutAdmin page="CONTACT"/>}/>
