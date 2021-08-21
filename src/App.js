@@ -10,7 +10,7 @@ import LayoutAdmin from './pages/admin/layout';
 import BlogDetail from './pages/client/blog_detail';
 import Contact from './pages/client/contact';
 import Memo from './pages/client/memo.js';
-
+import ChatPage from "./pages/client/chatbot"
 function App() {
   return (
     <Router>
@@ -20,6 +20,7 @@ function App() {
       <Route path="/contact" exact={true} component={Contact}></Route>
       <Route path="/blog-detail" exact={true} component={BlogDetail}></Route>
       <Route path="/memo" exact={true} component={Memo}></Route>
+      <Route path="/chat" exact={true} component={ChatPage}></Route>
       <AuthenRouter path="/admin" exact={true} component={()=><LayoutAdmin page="ADMIN"/>}/>
       <AuthenRouter path="/blog" exact={true} component={()=><LayoutAdmin page="BLOG"/>}/> 
       <AuthenRouter path="/blog/update" exact={true} component={()=><LayoutAdmin page="BLOG_UPDATE"/>}/> 

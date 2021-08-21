@@ -68,9 +68,9 @@ const Header = (props) => {
           </div>
         </Col>
         <Col span={4}>
-          <div className="colChild"  onClick={notiProcessing}>
+          <div className="colChild"  onClick={()=>{redirectPage("/chat")}}>
           <img src="/chat.png" style={{width:40,height:40}}/>
-            <p className="titleHeader">Chat with my bot</p>
+            <p className="titleHeader">Chat</p>
           </div>
         </Col>
         
