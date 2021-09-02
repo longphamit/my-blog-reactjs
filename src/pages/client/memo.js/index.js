@@ -19,7 +19,6 @@ function Memo(props) {
 
     return (
         <>
-            <Header/>
             <Row>
                 {
                     memos?memos.map(item=>{

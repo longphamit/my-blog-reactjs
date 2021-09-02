@@ -2,13 +2,17 @@ import { Button, Space, Table, Tag } from "antd";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
-
+import {
+  DeleteOutlined,
+  EditOutlined
+} from "@ant-design/icons";
 function ContactAdmin(props) {
   const [state, setState] = useState("");
   const [contacts, setContacts] = useState([]);
   const history = useHistory();
   const fetchContact = async () => {
     const res= await request.get("/contact/auth");
+    console.log(res.data)
     setContacts(res.data)
   };
 
@@ -45,10 +49,10 @@ function ContactAdmin(props) {
       title: "Created At",
       key: "createdAt",
       dataIndex: "createdAt",
-      render: (tag) => (
+      render: (date) => (
         <>
-          <Tag color="volcano" key={tag}>
-            {new Date(tag).toLocaleDateString()}
+          <Tag color="volcano" key={date}>
+            {new Date(date).toDateString()}
           </Tag>
         </>
       ),
@@ -58,7 +62,7 @@ function ContactAdmin(props) {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a>Update {record.name}</a>
+          <a><EditOutlined/> Update</a>
           <a
             style={{ color: "red" }}
             onClick={async () => {
@@ -66,6 +70,7 @@ function ContactAdmin(props) {
               //deleteItem(record.id);
             }}
           >
+            <DeleteOutlined/>
             Delete
           </a>
         </Space>

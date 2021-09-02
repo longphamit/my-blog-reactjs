@@ -3,7 +3,10 @@ import { Button, Space, Table, Tag, Modal, Input, Form, notification } from "ant
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
-
+import {
+  DeleteOutlined,
+  EditOutlined
+} from "@ant-design/icons";
 function CategoryAdmin(props) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -54,7 +57,8 @@ function CategoryAdmin(props) {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a>Update {record.name}</a>
+          <a><EditOutlined />   Update</a>
+
           <a
             style={{ color: "red" }}
             onClick={async () => {
@@ -62,6 +66,7 @@ function CategoryAdmin(props) {
             //   deleteItem(record.id);
             }}
           >
+            <DeleteOutlined />
             Delete
           </a>
         </Space>

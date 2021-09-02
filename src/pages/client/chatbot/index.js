@@ -62,7 +62,7 @@ function ChatPage(props) {
           <Col span={12}  style={{marginTop:20,textAlign:"center",alignItems:"center"}}>
             <Row style={{margin:0}}>
               <Col span={12}>
-              <ChatBox chatWith="author" name={name} />
+              {/* <ChatBox chatWith="author" name={name} /> */}
               </Col>
               <Col span={12}>
               <ChatBox chatWith="bot" name={name} /></Col>

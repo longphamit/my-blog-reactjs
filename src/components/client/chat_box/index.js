@@ -1,41 +1,62 @@
 import { Button, Col, Input, Row } from "antd";
 import React, { useState, useEffect, useRef } from "react";
 import "./styles.css";
-import io from "socket.io-client";
-import SockJsClient from "react-stomp";
+import SockJsClient from 'react-stomp';
+import { connectServerSocketNodeJs } from "../../../connect/SocketConfig";
+import request from "../../../connect/AxiosConfig";
+import { v4 as uuidv4 } from 'uuid';
 function ChatBox({ chatWith, name }) {
   const [state, setState] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState({
+    content:"",
+    name:name,
+    id:uuidv4()
+
+  });
   const [messageArray, setMessageArray] = useState([]);
   const [socket, setSocket] = useState(null);
-  const SOCKET_URL = "http://localhost:8080/ws-message";
-
-  const createClientChat = () => {};
-  const connectServerSocketNodeJs = async () => {
-    const socket = io("http://localhost:5000", {
-      transports: ["websocket", "polling", "flashsocket"],
-      credentials: true,
-    });
-    socket.on("client", (message) => console.log(message));
-    setSocket(socket);
-  };
   useEffect(() => {
+    //connect()
     return () => {};
   }, []);
+  const SOCKET_URL = 'http://localhost:8080/api/ws-message';
+  // const connect=async()=>{
+  //   const socketTemp = await connectServerSocketNodeJs();
+  //   console.log("connected"+name)
+  //   if(socketTemp){
+  //     socketTemp.io.on("add_room",(e)=>console.log("12121"))
+  //     setSocket(socketTemp)
+  //   }
+  // }
+  // const onSendData = async() => {
+  //   if (message) {
+  //     setMessage("");
+  //     setMessageArray([...messageArray, message]);
+  //   }
+  let onConnected = () => {
+    console.log("Connected!!")
+  }
 
-  const onSendData = () => {
-    if (message) {
-      setMessage("");
-      setMessageArray([...messageArray, message]);
-    }
-
-    // if(!socket){
-    //   connectServerSocketNodeJs();
-    // }
-    // socket.emit("client",message)
-  };
+  let onMessageReceived = (msg) => {
+    console.log('--------receive message-----')
+    console.log(msg)
+  }
+  const sendMessage=async()=>{
+    console.log(message)
+    await request.post("/chat/send",message)
+    //socket.sendMessage('/topic/message',"aaaaaaaaaaaaaaaaaaaaa")
+  }
   return (
     <>
+    <SockJsClient
+        url={SOCKET_URL}
+        topics={['/topic/message/'+message.id]}
+        onConnect={onConnected}
+        onDisconnect={console.log("Disconnected!")}
+        onMessage={msg => onMessageReceived(msg)}
+        ref={(client)=>{setSocket(client)}}
+        debug={false}
+      />
       <div style={{ height: 30, margin: 20 }}>
         <div style={{ marginTop: 20, marginBottom: 20 }}>
           Chat with {chatWith}
@@ -62,7 +83,7 @@ function ChatBox({ chatWith, name }) {
                         }}
                       >
                         <div>{mess.name}</div>
-                        <div style={{wordBreak:"break-all"}}>{mess.content}</div>
+                        <div style={{wordBreak:"break-all"}}>{mess}</div>
                       </div>
                     </Col>
                   </Row>
@@ -79,7 +100,7 @@ function ChatBox({ chatWith, name }) {
                         }}
                       >
                         <div>{mess.name}</div>
-                        <div>{mess.content}</div>
+                        <div>{mess}</div>
                       </div>
                     </Col>
                     <Col span={12} />
@@ -93,12 +114,12 @@ function ChatBox({ chatWith, name }) {
             <Input.TextArea
               value={message.content}
               onChange={(e) => {
-                setMessage({ name: name, content: e.target.value });
+                setMessage({...message, content: e.target.value });
               }}
             />
           </Col>
           <Col>
-            <Button onClick={() => onSendData()}>Send</Button>
+            <Button onClick={()=>sendMessage()}>Send</Button>
           </Col>
         </Row>
       </div>

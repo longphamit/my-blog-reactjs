@@ -15,71 +15,137 @@ const Home = (props) => {
     const res = await request.get("/blog");
     setData(res.data);
   };
-  const history= useHistory();
-  useEffect(() => {
-    fetchBlog();
-    notification["success"]({
-      message: "Phạm Càn Long",
-      placement: "bottomRight",
-      style: { background: "#d2ffc7" },
-      description: "Welcome to my blog! Have a nice day!",
-    });
-  }, []);
-  const redirectBlogDetail=(item)=>{
-    localStorage.setItem('BLOG_SELECTED',JSON.stringify(item))
-    history.push("/blog-detail")
-  }
+  const history = useHistory();
+  useEffect(() => {});
+  const redirectBlogList = () => {
+    history.push("/blog-list");
+  };
   return (
     <>
-      <Header />
       <TrackingCovid />
       <div className="body">
-        <h2 style={{ fontWeight: "bold", textAlign: "center" }}>Spring</h2>
-
+        <h2 style={{ fontWeight: "bold", textAlign: "center" }}>Tech</h2>
         <Row gutter={16}>
-          {data
-            ? data.map((item) => {
-                return (
-                  <Col className="gutter-row" span={6}>
-                    <div className="divCard">
-                      <Card
-                        hoverable
-                        className="card"
-                        cover={
-                          <img
-                          style={{height:300}}
-                            alt="example"
-                            src= {item.imageShow}
-                          />
-                        }
-                        onClick={()=>redirectBlogDetail(item)}
-                      >
-                        <Meta
-                          title={item.title}
-                          description="www.instagram.com"
-                        />
-                      </Card>
-                      <Row style={{ marginTop: 10 }}>
-                        <Col span={12}>
-                          <HeartOutlined
-                            style={{ fontSize: 30, color: "#f56747" }}
-                          />
-                        </Col>
-                        <Col span={12}>
-                          <SendOutlined
-                            style={{
-                              fontSize: 30,
-                              justifyContent: "flex-end",
-                              color: "#2f7dc2",
-                            }}
-                          />
-                        </Col>
-                      </Row>
-                    </div>
-                  </Col>
-                );
-              })
-            : null}
+          <Col className="gutter-row" span={6} onClick={()=>{redirectBlogList()}}>
+            <div className="divCard">
+              <Card
+                hoverable
+                className="card"
+                cover={
+                  <img
+                    width="300"
+                    height="300"
+                    alt="example"
+                    src={require('../../../assets/image/spring_boot_image.jpg').default}
+                  />
+                }
+              >
+                <Meta title="Spring boot" description="Blog about spring boot" />
+              </Card>
+            </div>
+          </Col>
+          <Col className="gutter-row" span={6}>
+            <div className="divCard">
+              <Card
+                hoverable
+                className="card"
+                cover={
+                  <img
+                    height="300"
+                    alt="example"
+                    src={require('../../../assets/image/dotnet_image.png').default}
+                  />
+                }
+              >
+                <Meta title=".NET" description="Blog about .NET" />
+              </Card>
+            </div>
+          </Col>
+          <Col className="gutter-row" span={6}>
+            <div className="divCard">
+              <Card
+                hoverable
+                className="card"
+                cover={
+                  <img
+                    height="300"
+                    alt="example"
+                    src={require('../../../assets/image/javascript_image.png').default}
+                  />
+                }
+              >
+                <Meta title=".NET" description="Blog about .NET" />
+              </Card>
+            </div>
+          </Col>
+          <Col className="gutter-row" span={6}>
+            <div className="divCard">
+              <Card
+                hoverable
+                className="card"
+                cover={
+                  <img
+                    height="300"
+                    alt="example"
+                    src={require('../../../assets/image/node_js_image.jpg').default}
+                  />
+                }
+              >
+                <Meta title="NodeJS" description="Blog about NodeJS" />
+              </Card>
+            </div>
+          </Col>
+          <Col className="gutter-row" span={6}>
+            <div className="divCard">
+              <Card
+                hoverable
+                className="card"
+                cover={
+                  <img
+                    height="300"
+                    alt="example"
+                    src={require('../../../assets/image/sql_image.png').default}
+                  />
+                }
+              >
+                <Meta title="SQL" description="Blog about SQL" />
+              </Card>
+            </div>
+          </Col>
+          <Col className="gutter-row" span={6}>
+            <div className="divCard">
+              <Card
+                hoverable
+                className="card"
+                cover={
+                  <img
+                    height="300"
+                    alt="example"
+                    src={require('../../../assets/image/docker_image.png').default}
+                  />
+                }
+              >
+                <Meta title="Docker" description="Blog about Docker" />
+              </Card>
+            </div>
+          </Col>
+          <Col className="gutter-row" span={6}>
+            <div className="divCard">
+              <Card
+                hoverable
+                className="card"
+                cover={
+                  <img
+                    height="300"
+                    alt="example"
+                    src={require('../../../assets/image/react_image.png').default}
+                  />
+                }
+              >
+                <Meta title="React" description="Blog about React" />
+              </Card>
+            </div>
+          </Col>
         </Row>
       </div>
     </>

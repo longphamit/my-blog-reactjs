@@ -14,7 +14,6 @@ const BlogDetail = (props) => {
 
   return (
     <>
-      <Header />
       <h1 style={{ textAlign: "center", margin: 30 }}>{data.title}</h1>
       <div className="info">
         <div style={{marginRight:30}}><ClockCircleOutlined style={{marginRight:10,color:"#4263f5"}}/>{new Date(data.createdAt).toLocaleDateString()}</div>

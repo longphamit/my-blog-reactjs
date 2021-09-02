@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Checkbox, Col, Input, Row, Form, notification } from "antd";
 
-import Header from "../../../components/client/header";
 import { SendOutlined } from "@ant-design/icons";
 import "./styles.css";
 import request from "../../../connect/AxiosConfig";
@@ -28,9 +27,8 @@ function Contact(props) {
     console.log("Failed:", errorInfo);
   };
   return (
-    <>
-      <Header />
-      <Row>
+    <div style={{height:500}}>
+      <Row style={{marginTop:200}}>
         <Col span={6}></Col>
         <Col className="form" span={12}>
           <Form
@@ -96,7 +94,7 @@ function Contact(props) {
         </Col>
         <Col span={6}></Col>
       </Row>
-    </>
+    </div>
   );
 }
 

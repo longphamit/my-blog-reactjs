@@ -6,7 +6,7 @@ import { logoutAction } from "../../../redux/action/UserAction";
 import "./styles.css";
 
 import { Layout, Menu } from "antd";
-import { UploadOutlined, UserOutlined,OrderedListOutlined,LogoutOutlined,HomeOutlined,FileImageOutlined,ContactsOutlined } from '@ant-design/icons';
+import { UploadOutlined, UserOutlined,OrderedListOutlined,LogoutOutlined,HomeOutlined,FileImageOutlined,ContactsOutlined,MessageOutlined } from '@ant-design/icons';
 import { Footer } from "antd/lib/layout/layout";
 
 
@@ -17,8 +17,9 @@ import MemoAdmin from "../memo";
 import ContactAdmin from "../contact";
 import CategoryAdmin from "../category";
 import BlogUpdate from "../blog_update";
-const { Header, Sider, Content } = Layout;
+import ChatAdmin from "../chat";
 
+const { Header, Sider, Content } = Layout;
 function LayoutAdmin(props) {
   const [collapsed, setCollapsed] = useState("");
   const location = useLocation();
@@ -59,19 +60,22 @@ function LayoutAdmin(props) {
             <Menu.Item key="2" icon={<UserOutlined />}>
               Profile
             </Menu.Item>
-            <Menu.Item key="3" icon={<OrderedListOutlined />}  onClick={()=>{history.replace('/admin/category')}}>
+            <Menu.Item key="3" icon={<MessageOutlined />} onClick={()=>{history.replace('/admin/chat')}}>
+              Chat
+            </Menu.Item>
+            <Menu.Item key="4" icon={<OrderedListOutlined />}  onClick={()=>{history.replace('/admin/category')}}>
               Category
             </Menu.Item>
-            <Menu.Item key="4" icon={<UploadOutlined />} onClick={()=>{history.replace('/blog')}}>
+            <Menu.Item key="5" icon={<UploadOutlined />} onClick={()=>{history.replace('/blog')}}>
               Blog
             </Menu.Item>
-            <Menu.Item key="5" icon={<FileImageOutlined />} onClick={()=>{history.replace('/admin/memo')}}>
+            <Menu.Item key="6" icon={<FileImageOutlined />} onClick={()=>{history.replace('/admin/memo')}}>
               Memo
             </Menu.Item>
-            <Menu.Item key="6" icon={<ContactsOutlined />} onClick={()=>{history.replace('/admin/contact')}}>
+            <Menu.Item key="7" icon={<ContactsOutlined />} onClick={()=>{history.replace('/admin/contact')}}>
               Contact
             </Menu.Item>
-            <Menu.Item key="7" icon={<LogoutOutlined />} onClick={()=>logout()}>
+            <Menu.Item key="8" icon={<LogoutOutlined />} onClick={()=>logout()}>
               Logout
             </Menu.Item>
           </Menu>
@@ -94,6 +98,7 @@ function LayoutAdmin(props) {
                  props.page==="MEMO_ADD"?<MemoAdd/>:
                  props.page==="MEMO"?<MemoAdmin/>:
                  props.page==="CONTACT"?<ContactAdmin/>:
+                 props.page==="CHAT"?<ChatAdmin/>:
                  props.page==="CATEGORY"?<CategoryAdmin/>: <Admin/>:<Admin/>
              }
             </div>

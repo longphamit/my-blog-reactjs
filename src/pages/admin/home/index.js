@@ -6,7 +6,10 @@ import { logoutAction } from "../../../redux/action/UserAction";
 import { Table, Tag, Space } from 'antd';
 import "./styles.css";
 import request from "../../../connect/AxiosConfig";
-
+import {
+  DeleteOutlined,
+  EditOutlined
+} from "@ant-design/icons";
 
 function Admin(props) {
   const history= useHistory();
@@ -53,8 +56,10 @@ function Admin(props) {
           <a onClick={()=>{
             history.push("/blog/update")
             localStorage.setItem("BLOG_ADMIN_SELECTED",JSON.stringify(record))
-          }}>Update {record.name}</a>
-          <a style={{color:"red"}} onClick={()=>request.delete('/blog/auth/'+record.id)}>Delete</a>
+          }}><EditOutlined/> Update</a>
+          <a style={{color:"red"}} onClick={()=>request.delete('/blog/auth/'+record.id)}>
+            <DeleteOutlined/>
+            Delete</a>
         </Space>
       ),
     },

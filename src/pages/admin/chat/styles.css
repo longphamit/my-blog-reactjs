@@ -1,0 +1,11 @@
+.listChatBox{
+    box-shadow: 5px 10px 8px #d6d6d6;
+    border-radius: 20px;
+    margin:20px;
+}
+.chatBoxAdmin{
+    border: 1px solid #5c96b5;
+    height: 400px;
+    width: 510px;
+    margin-top: 20px;
+}
