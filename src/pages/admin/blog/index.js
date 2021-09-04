@@ -4,6 +4,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import request from "../../../connect/AxiosConfig";
 import "./styles.css";
 import { Button, Input, notification,Select } from "antd";
+import { notify_success, notify_warning } from "../../../util/Notify";
 const { Option } = Select;
 function Blog(props) {
   const [imageShow, setImageShow] = useState();
@@ -26,13 +27,12 @@ function Blog(props) {
     setCategory(res.data)
   };
   const onSubmitBlog = async () => {
+    if(!blog.title){
+      notify_warning("Please fill title")
+        return
+    }
     if(!blog.categoryId){
-      notification["warning"]({
-        message: "System",
-        placement: "bottomRight",
-        style: { background: "#ffe88c" },
-        description: "Please Choose Category!",
-      });
+      notify_warning("Please choose category")
         return
     }
 
@@ -47,12 +47,7 @@ function Blog(props) {
     );
     const res = await request.post("/blog/auth", form);
     if (res.status == 200) {
-      notification["success"]({
-        message: "System",
-        placement: "bottomRight",
-        style: { background: "#d2ffc7" },
-        description: "Post a blog success!",
-      });
+      notify_success("Post a blog success")
     }
   };
   useEffect(() => {

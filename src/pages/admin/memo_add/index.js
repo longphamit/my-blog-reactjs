@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import "./styles.css";
 import request from "../../../connect/AxiosConfig";
+import { notify_success } from "../../../util/Notify";
 function MemoAdd(props) {
   const [memo, setMemo] = useState({
     content: "",
@@ -23,12 +24,7 @@ function MemoAdd(props) {
     );
     const res = await request.post("/memo/auth", form);
     if (res.status == 200) {
-        notification["success"]({
-          message: "System",
-          placement: "bottomRight",
-          style: { background: "#d2ffc7" },
-          description: "Post a memo success!",
-        });
+      notify_success("Post memo success")
     }
   };
 

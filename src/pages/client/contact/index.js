@@ -4,9 +4,9 @@ import { Button, Checkbox, Col, Input, Row, Form, notification } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import "./styles.css";
 import request from "../../../connect/AxiosConfig";
+import { notify_success } from "../../../util/Notify";
 function Contact(props) {
   const [state, setState] = useState("");
-
   useEffect(() => {
     return () => {};
   }, []);
@@ -14,12 +14,7 @@ function Contact(props) {
     console.log("Success:", values);
     const res = await request.post("/contact", values);
     if (res.status == 200) {
-      notification["success"]({
-        message: "System",
-        placement: "bottomRight",
-        style: { background: "#d2ffc7" },
-        description: "Send contact success!",
-      });
+      notify_success("Send contact success")
     }
   };
 

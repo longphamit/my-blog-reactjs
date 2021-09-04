@@ -17,12 +17,6 @@ const BlogList = (props) => {
   const history = useHistory();
   useEffect(() => {
     fetchBlog();
-    notification["success"]({
-      message: "Phạm Càn Long",
-      placement: "bottomRight",
-      style: { background: "#d2ffc7" },
-      description: "Welcome to my blog! Have a nice day!",
-    });
   }, []);
   const redirectBlogDetail = (item) => {
     localStorage.setItem("BLOG_SELECTED", JSON.stringify(item));
@@ -54,7 +48,7 @@ const BlogList = (props) => {
                           description=""
                         />
                       </Card>
-                      <Row style={{ marginTop: 10 }}>
+                      {/* <Row style={{ marginTop: 10 }}>
                         <Col span={12}>
                           <HeartOutlined
                             style={{ fontSize: 30, color: "#f56747" }}
@@ -69,7 +63,7 @@ const BlogList = (props) => {
                             }}
                           />
                         </Col>
-                      </Row>
+                      </Row> */}
                     </div>
                   </Col>
                 );

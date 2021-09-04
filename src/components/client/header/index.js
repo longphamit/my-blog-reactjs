@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import "./styles.css";
 import { useHistory } from "react-router";
+import { notify_warning } from "../../../util/Notify";
 const Header = (props) => {
   const [chooseHome, setChooseHome] = useState(true);
   const [chooseMemo, setChooseMemo] = useState(false);
@@ -33,12 +34,7 @@ const Header = (props) => {
     setChooseContact(false)
   }
   const notiProcessing=()=>{
-    notification["warning"]({
-      message: "System",
-      placement: "bottomRight",
-      style: { background: "#ffe88c" },
-      description: "This Item is being built",
-    });
+    notify_warning("This Item is being built")
   }
   return (
     <>

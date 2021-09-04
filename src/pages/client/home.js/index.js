@@ -8,6 +8,7 @@ import { HeartOutlined, SendOutlined } from "@ant-design/icons";
 import request from "../../../connect/AxiosConfig";
 import { useHistory } from "react-router";
 import Item from "antd/lib/list/Item";
+import { notify_success } from "../../../util/Notify";
 const { SubMenu } = Menu;
 const { Meta } = Card;
 const Home = (props) => {
@@ -20,6 +21,7 @@ const Home = (props) => {
   const history = useHistory();
   useEffect(() => {
     fetchCategory()
+    notify_success("Welcome to Long's blog! Have a nice day!")
     return () => {};
   }, []);
   const redirectBlogList = (id) => {
@@ -39,8 +41,7 @@ const Home = (props) => {
                 className="card"
                 cover={
                   <img
-                    width="300"
-                    height="300"
+                    
                     alt="example"
                     src={i.image}
                   />

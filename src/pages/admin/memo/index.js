@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
 import { deleteItemFromArray } from "../../../util/DeleteItem";
+import { notify_success } from "../../../util/Notify";
 
 function MemoAdmin(props) {
   const [memos, setMemos] = useState([]);
@@ -15,12 +16,7 @@ function MemoAdmin(props) {
   const deleteMemo = async (record) => {
     const res = await request.delete("memo/auth/" + record.id);
     if (res.status == 200) {
-      notification["success"]({
-        message: "System",
-        placement: "bottomRight",
-        style: { background: "#d2ffc7" },
-        description: "Delete a memo success!",
-      });
+      notify_success("Delete memo success")
       let newValue = deleteItemFromArray(record.id, memos);
       setMemos([...newValue]);
     }

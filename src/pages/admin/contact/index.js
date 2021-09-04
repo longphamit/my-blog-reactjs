@@ -1,37 +1,30 @@
-import { Button, Space, Table, Tag } from "antd";
+import { Button, notification, Space, Table, Tag } from "antd";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
 import {
   DeleteOutlined,
-  EditOutlined
 } from "@ant-design/icons";
+import { deleteItemFromArray } from "../../../util/DeleteItem";
+import { notify_success } from "../../../util/Notify";
 function ContactAdmin(props) {
   const [state, setState] = useState("");
   const [contacts, setContacts] = useState([]);
   const history = useHistory();
   const fetchContact = async () => {
     const res= await request.get("/contact/auth");
-    console.log(res.data)
     setContacts(res.data)
   };
 
-  // const deleteItem = (id) => {
-  //   let index = -1;
-  //   let i = 0;
-  //   let tempMemos = memos;
-  //   for (let item in tempMemos) {
-  //     if (item.id == id) {
-  //       index = i;
-  //     }
-  //     i++;
-  //   }
-  //   if (i > 0) {
-  //     console.log("true");
-  //     tempMemos.splice(i, 1);
-  //     setMemos(tempMemos);
-  //   }
-  // };
+  const deleteItem = async(id) => {
+      const res=await request.delete("/contact/auth/"+id)
+      if (res.status == 200) {
+        notify_success("Delete contact success")
+        let newValue= deleteItemFromArray(id,contacts)
+        setContacts([...newValue])
+      }
+      
+  };
   const columns = [
     {
       title: "Email",
@@ -52,7 +45,7 @@ function ContactAdmin(props) {
       render: (date) => (
         <>
           <Tag color="volcano" key={date}>
-            {new Date(date).toDateString()}
+            {new Date(date).toLocaleDateString()}
           </Tag>
         </>
       ),
@@ -62,12 +55,11 @@ function ContactAdmin(props) {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a><EditOutlined/> Update</a>
           <a
             style={{ color: "red" }}
             onClick={async () => {
               
-              //deleteItem(record.id);
+              deleteItem(record.id);
             }}
           >
             <DeleteOutlined/>
