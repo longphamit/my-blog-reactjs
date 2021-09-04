@@ -22,14 +22,15 @@ function LayOutClient(props) {
            <div>
                 {
                     props.page==="HOME"?<Home/>:
-                    props.page==="BLOG_LIST"?<BlogList/>:
+                    props.page==="BLOG_LIST"?<BlogList {...props}/>:
                     props.page==="BLOG_DETAIL"?<BlogDetail/>:
                     props.page==="MEMO"?<Memo/>:
                     props.page==="CONTACT"?<Contact/>:<Home/>
                 }
            </div>
            <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
+            Website created By LongPham
+            Contact 070579900
           </Footer>
         </>
     )

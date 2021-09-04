@@ -20,7 +20,7 @@ function App() {
       <Route path="/" exact={true} component={()=><LayOutClient page="HOME"/>}></Route>
       <Route path="/login" exact={true} component={Login}></Route>
       <Route path="/contact" exact={true} component={()=><LayOutClient page="CONTACT"/>}></Route>
-      <Route path="/blog-list" exact={true} component={()=><LayOutClient page="BLOG_LIST"/>}></Route>
+      <Route path="/blog-list/:id" exact={true} component={(props)=><LayOutClient page="BLOG_LIST" {...props}/>}></Route>
       <Route path="/blog-detail" exact={true} component={()=><LayOutClient page="BLOG_DETAIL"/>}></Route>
       <Route path="/memo" exact={true} component={()=><LayOutClient page="MEMO"/>}></Route>
       <Route path="/chat" exact={true} component={ChatPage}></Route>

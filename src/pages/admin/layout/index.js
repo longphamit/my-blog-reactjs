@@ -17,7 +17,6 @@ import MemoAdmin from "../memo";
 import ContactAdmin from "../contact";
 import CategoryAdmin from "../category";
 import BlogUpdate from "../blog_update";
-import ChatAdmin from "../chat";
 
 const { Header, Sider, Content } = Layout;
 function LayoutAdmin(props) {
@@ -60,9 +59,7 @@ function LayoutAdmin(props) {
             <Menu.Item key="2" icon={<UserOutlined />}>
               Profile
             </Menu.Item>
-            <Menu.Item key="3" icon={<MessageOutlined />} onClick={()=>{history.replace('/admin/chat')}}>
-              Chat
-            </Menu.Item>
+            
             <Menu.Item key="4" icon={<OrderedListOutlined />}  onClick={()=>{history.replace('/admin/category')}}>
               Category
             </Menu.Item>
@@ -98,7 +95,6 @@ function LayoutAdmin(props) {
                  props.page==="MEMO_ADD"?<MemoAdd/>:
                  props.page==="MEMO"?<MemoAdmin/>:
                  props.page==="CONTACT"?<ContactAdmin/>:
-                 props.page==="CHAT"?<ChatAdmin/>:
                  props.page==="CATEGORY"?<CategoryAdmin/>: <Admin/>:<Admin/>
              }
             </div>

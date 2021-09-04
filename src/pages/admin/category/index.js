@@ -1,22 +1,46 @@
-import { Button, Space, Table, Tag, Modal, Input, Form, notification } from "antd";
+import {
+  Button,
+  Space,
+  Table,
+  Tag,
+  Modal,
+  Input,
+  Form,
+  notification,
+  Upload,
+} from "antd";
 
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
-import {
-  DeleteOutlined,
-  EditOutlined
-} from "@ant-design/icons";
+import ImgCrop from "antd-img-crop";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 function CategoryAdmin(props) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [categories, setCategories] = useState([]);
   const history = useHistory();
+  const [fileList, setFileList] = useState([]);
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
   const fetchCategory = async () => {
     const res = await request.get("/category");
     setCategories(res.data);
   };
   const onAddModalFinish = async (values) => {
-      const res=await request.post("/category/auth",values);
+    if(fileList&&fileList.length>0){
+      let form= new FormData()
+      form.append("image",fileList[0].originFileObj)
+      form.append(
+        "category",
+        new Blob([JSON.stringify(values)], {
+          type: "application/json",
+        })
+      );
+      console.log(fileList)
+      console.log(values)
+      const res = await request.post("/category/auth", form);
       if (res.status == 200) {
         notification["success"]({
           message: "System",
@@ -24,25 +48,33 @@ function CategoryAdmin(props) {
           style: { background: "#d2ffc7" },
           description: "Add a category success!",
         });
+      }
+    }else{
+      notification["warning"]({
+        message: "System",
+        placement: "bottomRight",
+        description: "Please upload image",
+      });
     }
+    
   };
   const onAddModalFail = () => {};
-//   const deleteItem = (id) => {
-//     let index = -1;
-//     let i = 0;
-//     let tempMemos = memos;
-//     for (let item in tempMemos) {
-//       if (item.id == id) {
-//         index = i;
-//       }
-//       i++;
-//     }
-//     if (i > 0) {
-//       console.log("true");
-//       tempMemos.splice(i, 1);
-//       setMemos(tempMemos);
-//     }
-//   };
+  //   const deleteItem = (id) => {
+  //     let index = -1;
+  //     let i = 0;
+  //     let tempMemos = memos;
+  //     for (let item in tempMemos) {
+  //       if (item.id == id) {
+  //         index = i;
+  //       }
+  //       i++;
+  //     }
+  //     if (i > 0) {
+  //       console.log("true");
+  //       tempMemos.splice(i, 1);
+  //       setMemos(tempMemos);
+  //     }
+  //   };
   const onOkAddCategory = async () => {};
   const columns = [
     {
@@ -51,19 +83,20 @@ function CategoryAdmin(props) {
       key: "name",
       render: (text) => <a>{text}</a>,
     },
-    
+
     {
       title: "Action",
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a><EditOutlined />   Update</a>
+          <a>
+            <EditOutlined /> Update
+          </a>
 
           <a
             style={{ color: "red" }}
             onClick={async () => {
-            //   await request.delete("memo/auth/" + record.id);
-            //   deleteItem(record.id);
+              await request.delete("/category/auth/" + record.id);
             }}
           >
             <DeleteOutlined />
@@ -77,7 +110,20 @@ function CategoryAdmin(props) {
     fetchCategory();
     return () => {};
   }, []);
-
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow.document.write(image.outerHTML);
+  };
   return (
     <>
       <Modal
@@ -113,12 +159,31 @@ function CategoryAdmin(props) {
           >
             <Input />
           </Form.Item>
+
+          <Form.Item
+            label="Image"
+            name="imageList"
+          >
+            <ImgCrop rotate>
+              <Upload
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                listType="picture-card"
+                fileList={fileList}
+                onChange={onChange}
+                onPreview={onPreview}
+              >
+                {fileList.length == 0 && "+ Upload"}
+              </Upload>
+            </ImgCrop>
+
+          </Form.Item>
           <Form.Item
             wrapperCol={{
               offset: 8,
               span: 8,
             }}
           >
+            
             <Button type="primary" htmlType="submit">
               Add Category
             </Button>

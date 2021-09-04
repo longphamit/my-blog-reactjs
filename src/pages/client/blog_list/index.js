@@ -11,7 +11,7 @@ const { Meta } = Card;
 const BlogList = (props) => {
   const [data, setData] = useState("");
   const fetchBlog = async () => {
-    const res = await request.get("/blog");
+    const res = await request.get("/blog/" + props?.match?.params?.id || "");
     setData(res.data);
   };
   const history = useHistory();
@@ -51,7 +51,7 @@ const BlogList = (props) => {
                       >
                         <Meta
                           title={item.title}
-                          description="www.instagram.com"
+                          description=""
                         />
                       </Card>
                       <Row style={{ marginTop: 10 }}>

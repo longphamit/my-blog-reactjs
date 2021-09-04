@@ -43,11 +43,6 @@ const getConfig = () => {
     }
   }
 };
-const refreshToken=async()=>{
-  const refreshToken=localStorage.getItem("REFRESH_TOKEN")
-  const token= await axios.post("/refresh-token",{"refreshToken":refreshToken},getConfig())
-  localStorage.setItem("TOKEN",token);
-}
 const request = {
   get: (url) => axios.get(url,getConfig()),
   post: (url, data) => axios.post(url, data, getConfig()),
