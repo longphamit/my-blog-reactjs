@@ -27,6 +27,7 @@ const Home = (props) => {
   const redirectBlogList = (id) => {
     history.push("/blog-list/"+id);
   };
+  
   return (
     <>
       {/* <TrackingCovid /> */}

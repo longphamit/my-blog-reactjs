@@ -14,7 +14,7 @@ function Contact(props) {
     console.log("Success:", values);
     const res = await request.post("/contact", values);
     if (res.status == 200) {
-      notify_success("Send contact success")
+      notify_success("Thanks for your contact! I will connect with you soon!")
     }
   };
 

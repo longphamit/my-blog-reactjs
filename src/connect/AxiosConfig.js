@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
-axios.defaults.baseURL = "http://localhost:8080/api";
+axios.defaults.baseURL = "http://localhost:8080/REST-SERVICE";
 axios.interceptors.response.use(
   (res) => {
     return res;
