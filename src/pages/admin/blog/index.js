@@ -5,6 +5,7 @@ import request from "../../../connect/AxiosConfig";
 import "./styles.css";
 import { Button, Input, notification,Select } from "antd";
 import { notify_success, notify_warning } from "../../../util/Notify";
+import { HOST } from "../../../constant/Host";
 const { Option } = Select;
 function Blog(props) {
   const [imageShow, setImageShow] = useState();
@@ -91,7 +92,7 @@ function Blog(props) {
             config={{
               ckfinder: {
                 // Upload the images to the server using the CKFinder QuickUpload command.
-                uploadUrl: "http://localhost:8080/api/blog/auth/editor",
+                uploadUrl: HOST+"/blog/auth/editor",
               },
               image: {
                 // You need to configure the image toolbar, too, so it uses the new style buttons.

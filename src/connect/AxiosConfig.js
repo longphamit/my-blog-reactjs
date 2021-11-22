@@ -1,5 +1,6 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:8080/REST-SERVICE";
+import { HOST } from "../constant/Host";
+axios.defaults.baseURL = HOST;
 axios.interceptors.response.use(
   (res) => {
     return res;
