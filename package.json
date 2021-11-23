@@ -14,7 +14,7 @@
     "antd-img-crop": "^3.16.0",
     "axios": "^0.21.1",
     "ckeditor-custom-build": "^15.0.0",
-    "ckeditor5-custom-build": "file:./ckeditor5",
+    "ckeditor5-custom-build": "file:ckeditor5",
     "crypto-js": "^4.1.1",
     "html-react-parser": "^1.2.7",
     "my-blog-reactjs": "file:",

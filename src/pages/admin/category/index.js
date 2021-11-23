@@ -2,7 +2,6 @@ import {
   Button,
   Space,
   Table,
-  Tag,
   Modal,
   Input,
   Form,
@@ -29,19 +28,20 @@ function CategoryAdmin(props) {
     setCategories(res.data);
   };
   const onAddModalFinish = async (values) => {
-    if(fileList&&fileList.length>0){
-      let form= new FormData()
-      form.append("image",fileList[0].originFileObj)
+    if (fileList && fileList.length > 0) {
+      let form = new FormData();
+      form.append("image", fileList[0].originFileObj);
       form.append(
         "category",
         new Blob([JSON.stringify(values)], {
           type: "application/json",
         })
       );
-      console.log(fileList)
-      console.log(values)
+      console.log(fileList);
+      console.log(values);
       const res = await request.post("/category/auth", form);
       if (res.status == 200) {
+        await fetchCategory();
         notification["success"]({
           message: "System",
           placement: "bottomRight",
@@ -49,32 +49,27 @@ function CategoryAdmin(props) {
           description: "Add a category success!",
         });
       }
-    }else{
+    } else {
       notification["warning"]({
         message: "System",
         placement: "bottomRight",
         description: "Please upload image",
       });
     }
-    
   };
   const onAddModalFail = () => {};
-  //   const deleteItem = (id) => {
-  //     let index = -1;
-  //     let i = 0;
-  //     let tempMemos = memos;
-  //     for (let item in tempMemos) {
-  //       if (item.id == id) {
-  //         index = i;
-  //       }
-  //       i++;
-  //     }
-  //     if (i > 0) {
-  //       console.log("true");
-  //       tempMemos.splice(i, 1);
-  //       setMemos(tempMemos);
-  //     }
-  //   };
+  const deleteItem = async (id) => {
+    let res = await request.delete("/category/auth/" + id);
+    if(res.status==200){
+      await fetchCategory();
+      notification["success"]({
+        message: "System",
+        placement: "bottomRight",
+        style: { background: "#d2ffc7" },
+        description: "Delete a category success!",
+      });
+    }
+  };
   const onOkAddCategory = async () => {};
   const columns = [
     {
@@ -89,19 +84,19 @@ function CategoryAdmin(props) {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a>
+          <div>
             <EditOutlined /> Update
-          </a>
+          </div>
 
-          <a
+          <div
             style={{ color: "red" }}
-            onClick={async () => {
-              await request.delete("/category/auth/" + record.id);
+            onClick={() => {
+              deleteItem(record.id)
             }}
           >
             <DeleteOutlined />
             Delete
-          </a>
+          </div>
         </Space>
       ),
     },
@@ -160,10 +155,7 @@ function CategoryAdmin(props) {
             <Input />
           </Form.Item>
 
-          <Form.Item
-            label="Image"
-            name="imageList"
-          >
+          <Form.Item label="Image" name="imageList">
             <ImgCrop rotate>
               <Upload
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -175,7 +167,6 @@ function CategoryAdmin(props) {
                 {fileList.length == 0 && "+ Upload"}
               </Upload>
             </ImgCrop>
-
           </Form.Item>
           <Form.Item
             wrapperCol={{
@@ -183,7 +174,6 @@ function CategoryAdmin(props) {
               span: 8,
             }}
           >
-            
             <Button type="primary" htmlType="submit">
               Add Category
             </Button>

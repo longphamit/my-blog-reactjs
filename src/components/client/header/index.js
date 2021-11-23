@@ -38,13 +38,13 @@ const Header = (props) => {
   };
   return (
     <>
-      <header class="w3-container w3-center w3-padding-32">
+      <header style={{backgroundColor:"#009688"}} class="w3-container w3-center w3-padding-32">
         <link
           rel="stylesheet"
           href="https://www.w3schools.com/w3css/4/w3.css"
         />
         <h1>
-          <b>DevMon Blog</b>
+          <b style={{color:"#fff"}}>DevMon Blog</b>
         </h1>
         <p>
           Welcome to the blog of <span class="w3-tag">DevMon</span>
