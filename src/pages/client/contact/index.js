@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Checkbox, Col, Input, Row, Form, notification } from "antd";
+import { Button, Col, Input, Row, Form } from "antd";
 
 import { SendOutlined } from "@ant-design/icons";
 import "./styles.css";

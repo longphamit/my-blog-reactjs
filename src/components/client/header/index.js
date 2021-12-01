@@ -1,12 +1,5 @@
 import { Avatar, Col, notification, Row } from "antd";
 import React, { useState, useEffect } from "react";
-import {
-  HomeOutlined,
-  PictureOutlined,
-  MailOutlined,
-  CodeOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import "./styles.css";
 import { useHistory } from "react-router";
 import { notify_warning } from "../../../util/Notify";
@@ -75,7 +68,9 @@ const Header = (props) => {
           </div>
         </Col>
         <Col span={4}>
-          <div className="colChild" onClick={notiProcessing}>
+          <div className="colChild" onClick={() => {
+              redirectPage("/projects");
+            }}>
             <img src="/project.png" style={{ width: 40, height: 40 }} />
             <p className="titleHeader">Project</p>
           </div>

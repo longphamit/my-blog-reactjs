@@ -23,6 +23,7 @@ function App() {
       <Route path="/blog-list/:id" exact={true} component={(props)=><LayOutClient page="BLOG_LIST" {...props}/>}></Route>
       <Route path="/blog-detail" exact={true} component={()=><LayOutClient page="BLOG_DETAIL"/>}></Route>
       <Route path="/memo" exact={true} component={()=><LayOutClient page="MEMO"/>}></Route>
+      <Route path="/projects" exact={true} component={()=><LayOutClient page="PROJECT"/>}></Route>
       <Route path="/chat" exact={true} component={ChatPage}></Route>
       <AuthenRouter path="/admin" exact={true} component={()=><LayoutAdmin page="ADMIN"/>}/>
       <AuthenRouter path="/blog" exact={true} component={()=><LayoutAdmin page="BLOG"/>}/> 

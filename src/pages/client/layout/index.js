@@ -7,6 +7,7 @@ import BlogList from "../blog_list";
 import Contact from "../contact";
 import Home from "../home.js";
 import Memo from "../memo.js";
+import Project from "../project";
 
 function LayOutClient(props) {
   const [state, setState] = useState("");
@@ -29,6 +30,8 @@ function LayOutClient(props) {
           <Memo />
         ) : props.page === "CONTACT" ? (
           <Contact />
+        ) : props.page === "PROJECT" ? (
+          <Project />
         ) : (
           <Home />
         )}
