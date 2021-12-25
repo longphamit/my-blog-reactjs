@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import FooterClient from "../../../components/client/footer";
 import Header from "../../../components/client/header";
+import AboutMe from "../about_me";
 import BlogDetail from "../blog_detail";
 import BlogList from "../blog_list";
 import Contact from "../contact";
@@ -32,6 +33,8 @@ function LayOutClient(props) {
           <Contact />
         ) : props.page === "PROJECT" ? (
           <Project />
+        ) : props.page === "ABOUT_ME" ? (
+          <AboutMe />
         ) : (
           <Home />
         )}

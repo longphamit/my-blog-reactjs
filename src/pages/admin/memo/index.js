@@ -1,8 +1,7 @@
-import { Button, notification, Space, Table, Tag } from "antd";
+import { Button, Space, Table, Tag } from "antd";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
-import { deleteItemFromArray } from "../../../util/DeleteItem";
 import { notify_success } from "../../../util/Notify";
 
 function MemoAdmin(props) {
@@ -17,8 +16,7 @@ function MemoAdmin(props) {
     const res = await request.delete("memo/auth/" + record.id);
     if (res.status == 200) {
       notify_success("Delete memo success")
-      let newValue = deleteItemFromArray(record.id, memos);
-      setMemos([...newValue]);
+      setMemos(memos.filter(memo=>memo.id!==record.id));
     }
   };
   const columns = [

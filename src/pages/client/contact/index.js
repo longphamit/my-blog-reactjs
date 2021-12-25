@@ -22,8 +22,8 @@ function Contact(props) {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div style={{height:500}}>
-      <Row style={{marginTop:200}}>
+    <div style={{height:300}}>
+      <Row style={{marginTop:20}}>
         <Col span={6}></Col>
         <Col className="form" span={12}>
           <Form

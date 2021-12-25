@@ -1,17 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './pages/client/home.js';
-import Blog from './pages/admin/blog';
-import Admin from './pages/admin/home';
 import AuthenRouter from './router/AuthenRouter';
 import Login from './pages/admin/login';
 import LayoutAdmin from './pages/admin/layout';
-import BlogDetail from './pages/client/blog_detail';
-import Contact from './pages/client/contact';
-import Memo from './pages/client/memo.js';
 import ChatPage from "./pages/client/chatbot"
-import BlogList from './pages/client/blog_list';
 import LayOutClient from './pages/client/layout';
 function App() {
   return (
@@ -25,6 +18,8 @@ function App() {
       <Route path="/memo" exact={true} component={()=><LayOutClient page="MEMO"/>}></Route>
       <Route path="/projects" exact={true} component={()=><LayOutClient page="PROJECT"/>}></Route>
       <Route path="/chat" exact={true} component={ChatPage}></Route>
+      <Route path="/about-me" exact={true} component={()=><LayOutClient page="ABOUT_ME"/>}></Route>
+
       <AuthenRouter path="/admin" exact={true} component={()=><LayoutAdmin page="ADMIN"/>}/>
       <AuthenRouter path="/blog" exact={true} component={()=><LayoutAdmin page="BLOG"/>}/> 
       <AuthenRouter path="/blog/update" exact={true} component={()=><LayoutAdmin page="BLOG_UPDATE"/>}/> 

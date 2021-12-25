@@ -1,0 +1,18 @@
+.about-me-card{
+    margin-top: 30px;
+    display: block;
+    width: 500px;
+    box-shadow: 5px 10px 8px #d6d6d6;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: medium;
+    border-color: coral;
+}
+.sub-info{
+    color: "#000";
+    font-size: 12px;
+}

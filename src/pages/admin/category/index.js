@@ -14,10 +14,10 @@ import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
 import ImgCrop from "antd-img-crop";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { notify_success } from "../../../util/Notify";
 function CategoryAdmin(props) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [categories, setCategories] = useState([]);
-  const history = useHistory();
   const [fileList, setFileList] = useState([]);
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -61,16 +61,10 @@ function CategoryAdmin(props) {
   const deleteItem = async (id) => {
     let res = await request.delete("/category/auth/" + id);
     if(res.status==200){
-      await fetchCategory();
-      notification["success"]({
-        message: "System",
-        placement: "bottomRight",
-        style: { background: "#d2ffc7" },
-        description: "Delete a category success!",
-      });
+      notify_success("Delete category success")
+      setCategories(categories.filter(cate=>cate.id!==id))
     }
   };
-  const onOkAddCategory = async () => {};
   const columns = [
     {
       title: "Name",

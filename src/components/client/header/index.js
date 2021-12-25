@@ -3,35 +3,22 @@ import React, { useState, useEffect } from "react";
 import "./styles.css";
 import { useHistory } from "react-router";
 import { notify_warning } from "../../../util/Notify";
+import { PRIMARY_COLOR } from "../../../assets/constant/color";
 const Header = (props) => {
-  const [chooseHome, setChooseHome] = useState(true);
-  const [chooseMemo, setChooseMemo] = useState(false);
-  const [chooseProject, setChooseProject] = useState(false);
-  const [chooseContact, setChooseContact] = useState(false);
-  const [chooseChat, setChooseChat] = useState(false);
-  const [chooseProfile, setChooseProfile] = useState(false);
   const history = useHistory();
   useEffect(() => {
     return () => {};
   }, []);
   const redirectPage = (page) => {
-    setChoose();
     history.push(page);
   };
-  const setChoose = () => {
-    setChooseHome(false);
-    setChooseMemo(false);
-    setChooseProject(false);
-    setChooseChat(false);
-    setChooseProfile(false);
-    setChooseContact(false);
-  };
+
   const notiProcessing = () => {
     notify_warning("This Item is being built");
   };
   return (
     <>
-      <header style={{backgroundColor:"#009688"}} class="w3-container w3-center w3-padding-32">
+      <header style={{backgroundColor:PRIMARY_COLOR}} class="w3-container w3-center w3-padding-32">
         <link
           rel="stylesheet"
           href="https://www.w3schools.com/w3css/4/w3.css"
@@ -49,7 +36,6 @@ const Header = (props) => {
             className="colChild"
             onClick={() => {
               redirectPage("/");
-              setChooseHome(true);
             }}
           >
             <img src="/home.png" style={{ width: 40, height: 40 }} />
@@ -67,14 +53,14 @@ const Header = (props) => {
             <p className="titleHeader">Memo</p>
           </div>
         </Col>
-        <Col span={4}>
+        {/* <Col span={4}>
           <div className="colChild" onClick={() => {
               redirectPage("/projects");
             }}>
             <img src="/project.png" style={{ width: 40, height: 40 }} />
             <p className="titleHeader">Project</p>
           </div>
-        </Col>
+        </Col> */}
         <Col span={4}>
           <div
             className="colChild"
@@ -86,7 +72,7 @@ const Header = (props) => {
             <p className="titleHeader">Contact</p>
           </div>
         </Col>
-        <Col span={4}>
+        {/* <Col span={4}>
           <div
             className="colChild"
             onClick={() => {
@@ -96,10 +82,13 @@ const Header = (props) => {
             <img src="/chat.png" style={{ width: 40, height: 40 }} />
             <p className="titleHeader">Chat</p>
           </div>
-        </Col>
-
+        </Col> */}
+        <Col span={4}></Col>
+        <Col span={4}></Col>
         <Col span={4}>
-          <div className="colAvatar" onClick={notiProcessing}>
+          <div className="colAvatar" onClick={() => {
+              redirectPage("/about-me");
+            }}>
             <Avatar
               size={80}
               src="https://avatars.githubusercontent.com/u/77977221?s=400&u=e4a797cb6e88b4e5e5c909d43b70aa30b6f92a5d&v=4"

@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Col, notification, Row } from "antd";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation, withRouter } from "react-router";
@@ -10,6 +10,7 @@ import {
   DeleteOutlined,
   EditOutlined
 } from "@ant-design/icons";
+import { notify_success } from "../../../util/Notify";
 
 function Admin(props) {
   const history= useHistory();
@@ -57,7 +58,7 @@ function Admin(props) {
             history.push("/blog/update")
             localStorage.setItem("BLOG_ADMIN_SELECTED",JSON.stringify(record))
           }}><EditOutlined/> Update</a>
-          <a style={{color:"red"}} onClick={()=>request.delete('/blog/auth/'+record.id)}>
+          <a style={{color:"red"}} onClick={()=>deleteBlock(record.id)}>
             <DeleteOutlined/>
             Delete</a>
         </Space>
@@ -76,7 +77,14 @@ function Admin(props) {
     fetchBlogs()
     return () => {};
   }, []);
-
+  const deleteBlock=async(id)=>{
+    let res=await request.delete('/blog/auth/'+id)
+    if(res.status==200){
+      notify_success("Delete blog success")
+      setBlogs(blogs.filter(blog=>blog.id!==id))
+    }
+    
+  }
   return (
     <>
       {
