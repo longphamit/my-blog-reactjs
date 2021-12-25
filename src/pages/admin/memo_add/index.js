@@ -1,9 +1,7 @@
-import { Button, DatePicker, Form, Input, notification, Upload } from "antd";
+import { Button, DatePicker, Form, Input } from "antd";
 import React, { useState, useEffect } from "react";
-import { UploadOutlined } from "@ant-design/icons";
-import "./styles.css";
 import request from "../../../connect/AxiosConfig";
-import { notify_success } from "../../../util/Notify";
+import { notify_success,notify_warning } from "../../../util/Notify";
 function MemoAdd(props) {
   const [memo, setMemo] = useState({
     content: "",
@@ -11,8 +9,19 @@ function MemoAdd(props) {
   });
   const [image, setImage] = useState("");
   const onFinish = async () => {
-    if(memo.content)
-    console.log(memo)
+    if(!memo.content){
+      notify_warning("Content is not empty")
+      return
+    }
+    if(!memo.year){
+      notify_warning("Year is not empty")
+      return
+    }
+    if(!image.year){
+      notify_warning("Image is not empty")
+      return
+    }
+    console.log(memo);
     let form = new FormData();
     form.append("image", image);
 
@@ -24,12 +33,8 @@ function MemoAdd(props) {
     );
     const res = await request.post("/memo/auth", form);
     if (res.status == 200) {
-      notify_success("Post memo success")
+      notify_success("Post memo success");
     }
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
   useEffect(() => {
     return () => {};
@@ -37,17 +42,25 @@ function MemoAdd(props) {
 
   return (
     <>
-      <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-
-      >
-        <Form.Item label="Content">
-          <Input.TextArea onChange={(item)=>setMemo({...memo,content:item.target.value})} />
+      <Form name="basic" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
+        <Form.Item
+          label="Content"
+          rules={[{ required: true, message: "Please input content!" }]}
+        >
+          <Input.TextArea
+            onChange={(item) =>
+              setMemo({ ...memo, content: item.target.value })
+            }
+          />
         </Form.Item>
         <Form.Item label="Year">
-            <DatePicker picker="year" onChange={(item)=>item.year?setMemo({...memo,year:item.year()}):null} />;
+          <DatePicker
+            picker="year"
+            onChange={(item) =>
+              item.year ? setMemo({ ...memo, year: item.year() }) : null
+            }
+          />
+          ;
         </Form.Item>
 
         <Form.Item label="File" name="file">

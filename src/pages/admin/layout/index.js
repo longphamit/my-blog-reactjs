@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation, withRouter } from "react-router";
@@ -21,7 +21,6 @@ import BlogUpdate from "../blog_update";
 const { Header, Sider, Content } = Layout;
 function LayoutAdmin(props) {
   const [collapsed, setCollapsed] = useState("");
-  const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
   const logout = () => {
@@ -33,10 +32,6 @@ function LayoutAdmin(props) {
   useEffect(() => {
     return () => {};
   }, []);
-
-  const toggle = () => {
-    setCollapsed(!collapsed);
-  };
   return (
     <>
       <Layout className="layout">
@@ -100,7 +95,7 @@ function LayoutAdmin(props) {
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
+            DevMon System
           </Footer>
         </Layout>
       </Layout>

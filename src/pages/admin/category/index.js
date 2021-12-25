@@ -10,7 +10,6 @@ import {
 } from "antd";
 
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
 import request from "../../../connect/AxiosConfig";
 import ImgCrop from "antd-img-crop";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -78,10 +77,6 @@ function CategoryAdmin(props) {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <div>
-            <EditOutlined /> Update
-          </div>
-
           <div
             style={{ color: "red" }}
             onClick={() => {
