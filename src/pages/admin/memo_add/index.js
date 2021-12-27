@@ -17,7 +17,7 @@ function MemoAdd(props) {
       notify_warning("Year is not empty")
       return
     }
-    if(!image.year){
+    if(!image){
       notify_warning("Image is not empty")
       return
     }
