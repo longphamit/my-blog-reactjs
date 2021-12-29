@@ -9,10 +9,9 @@ import { Provider } from "react-redux";
 import rootSaga from "./redux/saga";
 import appReducer from "./redux/reducer";
 const sagaMiddleware = createSagaMiddleware();
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 const store = createStore(
   appReducer,
-  composeEnhancer(applyMiddleware(sagaMiddleware))
+  applyMiddleware(sagaMiddleware)
 );
 sagaMiddleware.run(rootSaga);
 ReactDOM.render(

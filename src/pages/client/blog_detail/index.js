@@ -1,12 +1,17 @@
-import { Card, Col, PageHeader, Row, notification } from "antd";
+import {Col, Row } from "antd";
 import React, { useState, useEffect } from "react";
-import Header from "../../../components/client/header";
 import "./styles.css";
 import {ClockCircleOutlined,UserOutlined } from "@ant-design/icons";
+import request from "../../../connect/AxiosConfig";
 const BlogDetail = (props) => {
   const [data, setData] = useState("");
-  const setBlogToState = () => {
-    setData(JSON.parse(localStorage.getItem("BLOG_SELECTED")));
+  const setBlogToState = async () => {
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+    let id = params.get('id');
+    let res=await request.get("/blog/"+id)
+    console.log(res)
+    setData(res.data);
   };
   useEffect(() => {
     setBlogToState();

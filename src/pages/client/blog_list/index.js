@@ -1,17 +1,14 @@
-import { Card, Col, PageHeader, Row, notification } from "antd";
+import { Card, Col, Row } from "antd";
 import React, { useState, useEffect } from "react";
-import Header from "../../../components/client/header";
-import { Menu } from "antd";
 import "./styles.css";
-import { HeartOutlined, SendOutlined } from "@ant-design/icons";
 import request from "../../../connect/AxiosConfig";
 import { useHistory } from "react-router";
-const { SubMenu } = Menu;
+
 const { Meta } = Card;
 const BlogList = (props) => {
   const [data, setData] = useState("");
   const fetchBlog = async () => {
-    const res = await request.get("/blog/" + props?.match?.params?.id || "");
+    const res = await request.get("/blog/category/" + props?.match?.params?.id || "");
     setData(res.data);
   };
   const history = useHistory();
@@ -19,8 +16,7 @@ const BlogList = (props) => {
     fetchBlog();
   }, []);
   const redirectBlogDetail = (item) => {
-    localStorage.setItem("BLOG_SELECTED", JSON.stringify(item));
-    history.push("/blog-detail");
+    history.push({pathname:"/blog-detail",search:"?id="+item.id});
   };
   return (
     <>
