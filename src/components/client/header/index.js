@@ -31,18 +31,18 @@ const Header = (props) => {
         </p>
       </header>
       <Row>
-        <Col span={4}>
+        <Col xs={12} xl={4} span={4}>
           <div
             className="colChild"
             onClick={() => {
               redirectPage("/");
             }}
           >
-            <img src="/home.png" style={{ width: 40, height: 40 }} />
+            <img src="/home.png" style={{ width: 30, height: 40 }} />
             <p className="titleHeader">Home</p>
           </div>
         </Col>
-        <Col span={4}>
+        <Col xs={12} xl={4} span={4}>
           <div
             className="colChild"
             onClick={() => {
@@ -61,7 +61,7 @@ const Header = (props) => {
             <p className="titleHeader">Project</p>
           </div>
         </Col> */}
-        <Col span={4}>
+        <Col xs={12} xl={4} span={4}>
           <div
             className="colChild"
             onClick={() => {
@@ -83,9 +83,9 @@ const Header = (props) => {
             <p className="titleHeader">Chat</p>
           </div>
         </Col> */}
-        <Col span={4}></Col>
-        <Col span={4}></Col>
-        <Col span={4}>
+        <Col xs={0} xl={4} span={4}></Col>
+        <Col xs={0} xl={4} span={4}></Col>
+        <Col xs={12} xl={4} span={4}>
           <div className="colAvatar" onClick={() => {
               redirectPage("/about-me");
             }}>

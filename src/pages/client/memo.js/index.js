@@ -25,7 +25,7 @@ function Memo(props) {
         {memos
           ? memos.map((item) => {
               return (
-                <Col className="gutter-row" span={6}>
+                <Col className="gutter-row" xl={6} xs={12} span={6}>
                   <div className="divCard">
                     <Card
                       onClick={() => {setMemoSelected(item);setVisible(true)}}

@@ -27,3 +27,9 @@
     float: right;
     margin-left: var(--ck-image-style-spacing);
 }
+code {
+    color: rgb(0, 31, 207);
+}
+pre {
+    background: #f3f3f3;
+}

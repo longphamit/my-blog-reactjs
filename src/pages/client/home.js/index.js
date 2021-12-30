@@ -35,12 +35,14 @@ const Home = (props) => {
       {/* <TrackingCovid /> */}
       <div className="body">
         
-        <Row gutter={16}>
+        <Row>
           {data
             ? data.map((i) => {
                 return (
                   <Col
                     className="gutter-row"
+                    xl={6}
+                    xs={12}
                     span={6}
                     onClick={() => {
                       redirectBlogList(i.id);
