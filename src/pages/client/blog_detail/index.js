@@ -27,11 +27,11 @@ const BlogDetail = (props) => {
 
       <div className="content">
         <Row>
-          <Col span={4}></Col>
-          <Col span={15}>
-            <div dangerouslySetInnerHTML={{ __html: data.content }} />
+          <Col xl={4} xs={0} span={4}></Col>
+          <Col xl={15} xs={24} span={15}>
+            <div style={{margin:20}} dangerouslySetInnerHTML={{ __html: data.content }} />
           </Col>
-          <Col span={4}></Col>
+          <Col xl={4} xs={0} span={4}></Col>
         </Row>
       </div>
     </>

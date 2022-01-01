@@ -1,4 +1,4 @@
-import { Card, Col, Row } from "antd";
+import { Card, Col, Image, Row } from "antd";
 import React, { useState, useEffect } from "react";
 import { Carousel } from "antd";
 import { Menu } from "antd";
@@ -23,18 +23,10 @@ const Home = (props) => {
   const redirectBlogList = (id) => {
     history.push("/blog-list/" + id);
   };
-  const contentStyle = {
-    height: "160px",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
-  };
   return (
     <>
       {/* <TrackingCovid /> */}
       <div className="body">
-        
         <Row>
           {data
             ? data.map((i) => {
@@ -49,13 +41,8 @@ const Home = (props) => {
                     }}
                   >
                     <div className="divCard">
-                      <Card
-                        hoverable
-                        className="card"
-                        cover={<img alt="example" src={i.image} />}
-                      >
-                        <Meta title={i.name} />
-                      </Card>
+                      <Image key={i.id} src={i.image} />
+                      <Meta title={i.name} />
                     </div>
                   </Col>
                 );

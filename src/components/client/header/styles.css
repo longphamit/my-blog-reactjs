@@ -1,7 +1,7 @@
 .colChild {
     padding: 20px;
     box-shadow: 5px 10px 8px #d6d6d6;
-    margin: 20px;
+    margin: 20px 5px 20px 5px;
     border-radius: 20px;
     text-align: center;
     font-weight: bold;

@@ -33,3 +33,9 @@ code {
 pre {
     background: #f3f3f3;
 }
+@media only screen and (max-width: 600px) {
+    .image{
+        width: 50%;
+        height: 50%;
+    }
+}

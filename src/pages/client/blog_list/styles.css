@@ -5,12 +5,8 @@
     margin:0 auto;
     align-items: center;
 }
-.divCard{
-    padding: 10px;
-    box-shadow: 5px 10px 8px #d6d6d6;
-    margin: 20px;
-    border-radius: 20px;
-    text-align: center;
+.titleCard{
+    font-size: 13px;
+    font-family:  Arial, sans-serif;
     font-weight: bold;
-    font-size: larger;
 }

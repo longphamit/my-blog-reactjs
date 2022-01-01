@@ -22,10 +22,10 @@ function Contact(props) {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div style={{height:300}}>
+    <div>
       <Row style={{marginTop:20}}>
-        <Col span={6}></Col>
-        <Col className="form" span={12}>
+        <Col xl={6} xs={0} span={6}></Col>
+        <Col xl={12} xs={24} className="form" span={12}>
           <Form
             name="basic"
             labelCol={{
@@ -87,7 +87,7 @@ function Contact(props) {
             </Form.Item>
           </Form>
         </Col>
-        <Col span={6}></Col>
+        <Col xl={6} xs={0} span={6}></Col>
       </Row>
     </div>
   );

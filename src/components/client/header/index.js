@@ -38,7 +38,7 @@ const Header = (props) => {
               redirectPage("/");
             }}
           >
-            <img src="/home.png" style={{ width: 30, height: 40 }} />
+            <img src="/home.png" style={{ width: 40, height: 40 }} />
             <p className="titleHeader">Home</p>
           </div>
         </Col>
@@ -93,7 +93,7 @@ const Header = (props) => {
               size={80}
               src="https://avatars.githubusercontent.com/u/77977221?s=400&u=e4a797cb6e88b4e5e5c909d43b70aa30b6f92a5d&v=4"
             />
-            <p className="titleHeader"> About me</p>
+            <p className="titleHeader">Devmon</p>
           </div>
         </Col>
       </Row>
