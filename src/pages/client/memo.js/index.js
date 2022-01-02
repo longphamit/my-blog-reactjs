@@ -23,11 +23,13 @@ function Memo(props) {
           ? memos.map((item) => {
               return (
                 <Col className="gutter-row" xl={6} xs={12} span={6}>
-                  <div className="divCard">
+                  <div className="divMemoCard">
                     <Image key={item.id} src={item.image} />
+
                     <p className="titleCard">
                       {item.content}
                     </p>
+
                     <Meta style={{ fontSize: 11 }} description={item.year} />
                   </div>
                 </Col>
