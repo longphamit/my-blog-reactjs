@@ -68,8 +68,9 @@ function Contact(props) {
             </Form.Item>
             <Form.Item
               wrapperCol={{
-                offset: 6,
-                span: 12,
+                
+                span: 24,
+                
               }}
             >
               <Button

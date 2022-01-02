@@ -1,11 +1,11 @@
 import { Card, Col, Image, Row } from "antd";
 import React, { useState, useEffect } from "react";
-import { Carousel } from "antd";
-import { Menu } from "antd";
 import "./styles.css";
 import request from "../../../connect/AxiosConfig";
 import { useHistory } from "react-router";
 import { notify_success } from "../../../util/Notify";
+import moment from 'moment'
+import CountDown from "../../../components/client/recom/count_down/CountDown";
 const { Meta } = Card;
 const Home = (props) => {
   const [data, setData] = useState();
@@ -25,7 +25,11 @@ const Home = (props) => {
   };
   return (
     <>
-      {/* <TrackingCovid /> */}
+     <CountDown 
+     toTime="1/2/2022 00:00:00" 
+     timeFormat="DD/MM/YYYY HH:mm:ss" 
+     title="TẾT HOLIDAY"
+     description="HAPPY LUNAR NEW YEAR"/>
       <div className="body">
         <Row>
           {data
